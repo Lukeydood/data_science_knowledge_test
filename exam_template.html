@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F7F6; --sheet: #FFFFFF; --ink: #1A2B48; --ink-2: #4A5A72; --rule: #C9D6E3; --rule-soft: #E3EAF1;
+    --mark: #D6456B; --mark-bg: #FCEDF1; --pass: #1E7A57; --pass-bg: #E5F4ED; --focus: #2F6FEB;
+    --sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #10161F; --sheet: #17202C; --ink: #E6EDF5; --ink-2: #9FB0C4; --rule: #2E3D50; --rule-soft: #223042;
+      --mark: #FF7A98; --mark-bg: #3A1824; --pass: #5FD3A2; --pass-bg: #12322A; --focus: #8DB4FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #10161F; --sheet: #17202C; --ink: #E6EDF5; --ink-2: #9FB0C4; --rule: #2E3D50; --rule-soft: #223042;
+    --mark: #FF7A98; --mark-bg: #3A1824; --pass: #5FD3A2; --pass-bg: #12322A; --focus: #8DB4FF;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 76px; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--sans);
+         -webkit-font-smoothing: antialiased; }
+  .hidden { display: none !important; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  /* Header */
+  header.top { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--paper) 92%, transparent);
+               backdrop-filter: blur(6px); border-bottom: 1px solid var(--rule); }
+  header.top .bar { max-width: 760px; margin: 0 auto; padding: 12px 16px; display: flex; gap: 16px; align-items: baseline; }
+  header.top h1 { flex: 1; min-width: 0; margin: 0; font-size: .95rem; font-weight: 650; font-stretch: 112%;
+                  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .count { font-variant-numeric: tabular-nums; font-size: .9rem; color: var(--ink-2); white-space: nowrap; }
+  .count.low { color: var(--mark); font-weight: 650; }
+  .progress { height: 3px; background: transparent; }
+  .progress > span { display: block; height: 100%; width: 0; background: var(--ink); transition: width .25s ease; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 8px 16px 96px; }
+
+  /* Start screen */
+  .start { padding: 40px 0 8px; }
+  .start h2 { font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.05; font-weight: 800; font-stretch: 118%;
+              letter-spacing: -.01em; margin: 0 0 14px; max-width: 16ch; }
+  .start .meta { color: var(--ink-2); font-size: .9rem; margin: 0 0 28px; }
+  .rules { list-style: none; padding: 0; margin: 0 0 32px; border-top: 1px solid var(--rule); max-width: 62ch; }
+  .rules li { padding: 12px 0 12px 32px; border-bottom: 1px solid var(--rule-soft); position: relative; }
+  .rules li::before { content: ""; position: absolute; left: 4px; top: 17px; width: 13px; height: 13px;
+                      border: 1.5px solid var(--ink); border-radius: 50%; }
+  .rules li:first-child::before { background: var(--ink); }
+
+  /* Buttons */
+  .btn { font: 600 1rem/1 var(--sans); font-stretch: 105%; border-radius: 999px; padding: 14px 24px; cursor: pointer;
+         border: 1.5px solid var(--ink); background: transparent; color: var(--ink); }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn:hover { box-shadow: 0 0 0 3px var(--rule-soft); }
+  .btn.small { padding: 10px 18px; font-size: .9rem; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+  /* Questions: ruled answer-sheet rows */
+  #exam { margin-top: 8px; }
+  .q { display: grid; grid-template-columns: 44px 1fr; column-gap: 12px; padding: 28px 0 24px;
+       border-bottom: 1px solid var(--rule); position: relative; }
+  .q-num { font: 800 1.35rem/1 var(--sans); font-stretch: 120%; font-variant-numeric: tabular-nums; padding-top: 4px; }
+  .q-body { min-width: 0; }
+  .q-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; margin-bottom: 6px; }
+  .q-ksb { font-size: .8rem; color: var(--ink-2); }
+  .q-text { font: 400 1.12rem/1.5 var(--serif); margin: 0 0 6px; max-width: 64ch; }
+  .q-instr { font-size: .85rem; color: var(--ink-2); margin-bottom: 12px; }
+  .opts { display: grid; gap: 6px; }
+  .opt { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding: 9px 10px 9px 6px;
+         border-radius: 10px; cursor: pointer; position: relative; }
+  .opt:hover { background: var(--rule-soft); }
+  .opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .bubble { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center;
+            font: 650 .85rem/1 var(--sans); font-stretch: 110%; transition: background .12s ease, color .12s ease, transform .12s ease; }
+  .multi .bubble { border-radius: 8px; }
+  .opt input:checked + .bubble { background: var(--ink); color: var(--paper); transform: scale(1.04); }
+  .opt input:focus-visible + .bubble { outline: 2px solid var(--focus); outline-offset: 3px; }
+  .txt { padding-top: 4px; }
+  .tag { grid-column: 2; font-size: .8rem; font-weight: 650; }
+  .tag:empty { display: none; }
+
+  /* After marking */
+  .marked .opt { cursor: default; }
+  .marked .opt:hover { background: transparent; }
+  .q.correct::before, .q.incorrect::before { content: ""; position: absolute; left: -16px; top: 28px; bottom: 24px; width: 4px; border-radius: 2px; }
+  .q.correct::before { background: var(--pass); }
+  .q.incorrect::before { background: var(--mark); }
+  .q.incorrect { background: linear-gradient(to right, var(--mark-bg), transparent 70%); }
+  .verdict { font-size: .85rem; font-weight: 700; }
+  .verdict.ok { color: var(--pass); } .verdict.bad { color: var(--mark); }
+  .opt.is-answer .bubble, .opt.is-answer input:checked + .bubble { border-color: var(--pass); background: var(--pass); color: var(--paper); }
+  .opt.is-answer .tag { color: var(--pass); }
+  .opt.chosen-wrong .bubble, .opt.chosen-wrong input:checked + .bubble { border-color: var(--mark); background: var(--mark); color: var(--paper); }
+  .opt.chosen-wrong .txt { text-decoration: line-through; text-decoration-color: var(--mark); }
+  .opt.chosen-wrong .tag { color: var(--mark); }
+  .explain { margin-top: 12px; padding: 12px 14px; border-left: 2px solid var(--rule); font-size: .95rem; color: var(--ink); max-width: 66ch; }
+  .explain strong { font-weight: 650; }
+
+  #submit-row { padding: 32px 0 0; }
+
+  /* Results */
+  #results { padding: 36px 0 28px; border-bottom: 1px solid var(--rule); outline: none; }
+  #results h2 { font-size: 1rem; font-weight: 650; margin: 0 0 4px; color: var(--ink-2); }
+  .score { font: 800 clamp(3.4rem, 14vw, 5.5rem)/1 var(--sans); font-stretch: 125%; font-variant-numeric: tabular-nums;
+           letter-spacing: -.02em; margin: 6px 0 12px; }
+  .summary { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; margin: 0 0 22px; color: var(--ink-2); }
+  .band { font-weight: 700; padding: 5px 12px; border-radius: 999px; }
+  .band.pass { color: var(--pass); background: var(--pass-bg); }
+  .band.fail { color: var(--mark); background: var(--mark-bg); }
+  .warnbox { color: var(--mark); font-weight: 600; margin: 0 0 10px; }
+  .strip-label { font-size: .9rem; color: var(--ink-2); margin: 0 0 8px; }
+  .strip { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 26px; }
+  .strip > * { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; text-decoration: none;
+               font: 650 .8rem/1 var(--sans); font-variant-numeric: tabular-nums; }
+  .strip .s-ok { border: 1.5px solid var(--pass); color: var(--pass); }
+  .strip a { background: var(--mark); color: var(--paper); border: 1.5px solid var(--mark); }
+  .strip a:hover { transform: scale(1.08); }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; margin: 0 0 18px; }
+  th { text-align: left; font-weight: 650; color: var(--ink-2); padding: 6px 8px 6px 0; border-bottom: 1px solid var(--rule); }
+  td { padding: 8px 8px 8px 0; border-bottom: 1px solid var(--rule-soft); vertical-align: middle; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.k { font-weight: 650; white-space: nowrap; }
+  .meter { height: 8px; background: var(--rule-soft); border-radius: 4px; overflow: hidden; min-width: 70px; }
+  .meter > span { display: block; height: 100%; background: var(--pass); }
+  .meter > span.weak { background: var(--mark); }
+  .toggle { display: inline-flex; gap: 10px; align-items: center; margin: 4px 0 20px; cursor: pointer; }
+  .toggle input { width: 18px; height: 18px; accent-color: var(--ink); }
+
+  @media (max-width: 560px) {
+    .q { grid-template-columns: 1fr; }
+    .q-num { font-size: 1.1rem; margin-bottom: 8px; }
+    .q.correct::before, .q.incorrect::before { left: -10px; }
+    th.hide-sm, td.hide-sm { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media print {
+    header.top, .actions, .toggle, #submit-row { display: none !important; }
+    body { background: #fff; color: #000; } .q { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <h1 title="__TITLE__">__SHORT_TITLE__</h1>
+    <span class="count" id="progress" aria-live="polite">0 / 30 answered</span>
+    <span class="count hidden" id="timer" aria-live="polite"></span>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+</header>
+<main>
+  <section class="start" id="start-card">
+    <h2>Knowledge test practice paper</h2>
+    <p class="meta" id="paper-meta"></p>
+    <ul class="rules">
+      <li><span id="intro-count">30</span> multiple-choice questions, four options each.</li>
+      <li id="intro-multi"></li>
+      <li>One mark per question. Multi-answer questions need every correct option and nothing else.</li>
+      <li id="intro-pass"></li>
+      <li id="intro-time"></li>
+      <li>Closed book. No notes or reference material.</li>
+    </ul>
+    <div class="actions"><button class="btn primary" id="start-btn" type="button">Start paper</button></div>
+  </section>
+
+  <section class="hidden" id="results" tabindex="-1" aria-live="polite"></section>
+
+  <form id="exam" class="hidden" autocomplete="off"></form>
+
+  <div class="actions hidden" id="submit-row">
+    <button class="btn primary" id="submit-btn" type="button">Submit and mark</button>
+  </div>
+</main>
+
+<script>
+/* Exam data is generated by generate_exams.py / the web app. The answer key and
+   explanations are base64-encoded so they are not visible at a glance in the source. */
+const EXAM = /*__EXAM_DATA__*/null;
+
+(function () {
+  "use strict";
+  const LETTERS = "ABCD";
+  const WORDS = {2: "two", 3: "three"};
+  const form = document.getElementById("exam");
+  const total = EXAM.questions.length;
+  let submitted = false, deadline = null, tick = null, startedAt = null;
+
+  function decodeKey() {
+    const bytes = Uint8Array.from(atob(EXAM.key), c => c.charCodeAt(0));
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
+  function el(tag, attrs, text) {
+    const e = document.createElement(tag);
+    if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  const areaLabel = k => (k === "GEN" ? "General data science" : `KSB ${k}`);
+
+  // ---------- Start screen ----------
+  document.getElementById("paper-meta").textContent =
+    `Paper ${EXAM.paper_id}, drawn from ${EXAM.bank_size} questions. Generated ${EXAM.generated}.`;
+  document.getElementById("intro-count").textContent = total;
+  document.getElementById("intro-multi").textContent = EXAM.hide_answer_count
+    ? "Some questions have more than one correct answer, and you won't be told which. Select every option you think is right."
+    : "Most questions have one answer. Where more are correct, the question says how many to select.";
+  const passLi = document.getElementById("intro-pass");
+  if (EXAM.pass_mark) passLi.textContent = `Pass mark ${EXAM.pass_mark} out of ${total} (${Math.round(100 * EXAM.pass_mark / total)}%).`;
+  else passLi.remove();
+  document.getElementById("intro-time").textContent = EXAM.time_limit_min > 0
+    ? `${EXAM.time_limit_min} minutes. The paper is marked automatically when time runs out.`
+    : "Untimed. Your time taken is shown with your result.";
+
+  // ---------- Questions ----------
+  function buildForm() {
+    form.innerHTML = "";
+    EXAM.questions.forEach((q, i) => {
+      const multi = EXAM.hide_answer_count || q.select > 1;
+      const card = el("section", {class: "q" + (multi ? " multi" : ""), id: `q${i + 1}`, role: "group", "aria-labelledby": `q${i + 1}t`});
+      card.append(el("div", {class: "q-num", "aria-hidden": "true"}, String(i + 1)));
+      const body = el("div", {class: "q-body"});
+      const head = el("div", {class: "q-head"});
+      head.append(el("span", {class: "q-ksb"}, areaLabel(q.ksb)));
+      body.append(head);
+      body.append(el("p", {class: "q-text", id: `q${i + 1}t`}, q.question));
+      let instr;
+      if (EXAM.hide_answer_count) instr = "Select one or more";
+      else instr = q.select > 1 ? `Select ${WORDS[q.select] || q.select}` : "Select one";
+      body.append(el("div", {class: "q-instr"}, instr));
+      const opts = el("div", {class: "opts"});
+      q.options.forEach((opt, j) => {
+        const id = `q${i + 1}o${j}`;
+        const label = el("label", {class: "opt", for: id});
+        const input = el("input", {type: multi ? "checkbox" : "radio", name: `q${i}`, value: j, id: id});
+        input.addEventListener("change", () => onChange(i, q, input));
+        label.append(input, el("span", {class: "bubble", "aria-hidden": "true"}, LETTERS[j]),
+                     el("span", {class: "txt"}, opt), el("span", {class: "tag"}));
+        opts.append(label);
+      });
+      body.append(opts);
+      card.append(body);
+      form.append(card);
+    });
+  }
+  buildForm();
+
+  function selected(i) {
+    return [...form.querySelectorAll(`input[name="q${i}"]:checked`)].map(x => +x.value).sort();
+  }
+  function onChange(i, q, input) {
+    if (!EXAM.hide_answer_count && q.select > 1 && input.checked && selected(i).length > q.select) input.checked = false;
+    updateProgress();
+  }
+  function updateProgress() {
+    const answered = EXAM.questions.filter((_, i) => selected(i).length > 0).length;
+    document.getElementById("progress").textContent = `${answered} / ${total} answered`;
+    document.getElementById("progress-bar").style.width = `${100 * answered / total}%`;
+    return answered;
+  }
+  updateProgress();
+
+  // ---------- Timer ----------
+  function startTimer() {
+    const t = document.getElementById("timer");
+    if (!(EXAM.time_limit_min > 0)) { t.classList.add("hidden"); return; }
+    t.classList.remove("hidden");
+    deadline = Date.now() + EXAM.time_limit_min * 60000;
+    const render = () => {
+      const ms = Math.max(0, deadline - Date.now());
+      const m = Math.floor(ms / 60000), s = Math.floor((ms % 60000) / 1000);
+      t.textContent = `${m}:${String(s).padStart(2, "0")} left`;
+      t.classList.toggle("low", ms < 5 * 60000);
+      if (ms === 0) { clearInterval(tick); mark(true); }
+    };
+    render();
+    tick = setInterval(render, 1000);
+  }
+
+  document.getElementById("start-btn").addEventListener("click", () => {
+    document.getElementById("start-card").classList.add("hidden");
+    form.classList.remove("hidden");
+    document.getElementById("submit-row").classList.remove("hidden");
+    window.scrollTo(0, 0);
+    startedAt = Date.now();
+    startTimer();
+  });
+
+  document.getElementById("submit-btn").addEventListener("click", () => {
+    const unanswered = total - updateProgress();
+    if (unanswered > 0 && !confirm(`You have ${unanswered} unanswered question${unanswered === 1 ? "" : "s"}. Submit anyway?`)) return;
+    mark(false);
+  });
+
+  // ---------- Marking ----------
+  function sameSet(a, b) { return a.length === b.length && a.every((v, k) => v === b[k]); }
+
+  function mark(timedOut) {
+    if (submitted) return;
+    submitted = true;
+    clearInterval(tick);
+    const key = decodeKey();
+    const usedMs = deadline ? EXAM.time_limit_min * 60000 - Math.max(0, deadline - Date.now())
+                            : (startedAt ? Date.now() - startedAt : null);
+    form.classList.add("marked");
+    form.querySelectorAll("input").forEach(x => (x.disabled = true));
+
+    let score = 0;
+    const results = [];
+    const byKsb = {};
+    EXAM.questions.forEach((q, i) => {
+      const ans = key.answers[i].slice().sort();
+      const sel = selected(i);
+      const ok = sameSet(sel, ans);
+      if (ok) score++;
+      results.push(ok);
+      const k = byKsb[q.ksb] || (byKsb[q.ksb] = {title: q.ksb_title, n: 0, ok: 0});
+      k.n++; if (ok) k.ok++;
+
+      const card = document.getElementById(`q${i + 1}`);
+      card.classList.add(ok ? "correct" : "incorrect");
+      card.querySelector(".q-head").prepend(el("span", {class: "verdict " + (ok ? "ok" : "bad")},
+        ok ? "Correct" : (sel.length ? "Incorrect" : "Not answered")));
+      card.querySelectorAll(".opt").forEach((lab, j) => {
+        const tag = lab.querySelector(".tag");
+        const isAns = ans.includes(j), chosen = sel.includes(j);
+        if (isAns) { lab.classList.add("is-answer"); tag.textContent = chosen ? "Your answer, correct" : "Correct answer"; }
+        else if (chosen) { lab.classList.add("chosen-wrong"); tag.textContent = "Your answer"; }
+      });
+      const ex = el("div", {class: "explain"});
+      ex.append(el("strong", null, "Why: "), document.createTextNode(key.explanations[i]));
+      card.querySelector(".q-body").append(ex);
+    });
+    renderResults(score, results, byKsb, timedOut, usedMs);
+  }
+
+  function renderResults(score, results, byKsb, timedOut, usedMs) {
+    const r = document.getElementById("results");
+    r.innerHTML = "";
+    r.classList.remove("hidden");
+    if (timedOut) r.append(el("p", {class: "warnbox"}, "Time ran out, so the paper was marked automatically."));
+    r.append(el("h2", null, "Your score"));
+    r.append(el("div", {class: "score"}, `${score} / ${total}`));
+
+    const summary = el("div", {class: "summary"});
+    if (EXAM.pass_mark) {
+      const pass = score >= EXAM.pass_mark;
+      summary.append(el("span", {class: "band " + (pass ? "pass" : "fail")},
+        `${pass ? "PASS" : "FAIL"} · needed ${EXAM.pass_mark}/${total}`));
+    }
+    summary.append(el("span", null, `${Math.round(100 * score / total)}%`));
+    if (usedMs !== null) {
+      const m = Math.floor(usedMs / 60000), s = Math.floor((usedMs % 60000) / 1000);
+      summary.append(el("span", null, `${m}m ${s}s`));
+    }
+    r.append(summary);
+
+    const wrong = results.filter(ok => !ok).length;
+    r.append(el("p", {class: "strip-label"}, wrong
+      ? `Tap a red question to jump to it. ${wrong} to review.`
+      : "Full marks. Every question correct."));
+    const strip = el("div", {class: "strip jump"});
+    results.forEach((ok, i) => {
+      strip.append(ok ? el("span", {class: "s-ok", title: `Question ${i + 1}: correct`}, i + 1)
+                      : el("a", {href: `#q${i + 1}`, title: `Question ${i + 1}: review`}, i + 1));
+    });
+    r.append(strip);
+
+    const tbl = el("table");
+    const thead = el("tr");
+    thead.append(el("th", null, "Area"), el("th", {class: "hide-sm"}, "Covers"), el("th", null, ""), el("th", {style: "text-align:right"}, "Score"));
+    tbl.append(thead);
+    Object.keys(byKsb).sort((a, b) => a.localeCompare(b, undefined, {numeric: true})).forEach(k => {
+      const d = byKsb[k];
+      const tr = el("tr");
+      const meter = el("div", {class: "meter"});
+      const bar = el("span"); bar.style.width = `${Math.round(100 * d.ok / d.n)}%`;
+      if (d.ok / d.n < 0.6) bar.classList.add("weak");
+      meter.append(bar);
+      const td = el("td"); td.append(meter);
+      tr.append(el("td", {class: "k"}, k === "GEN" ? "General" : k), el("td", {class: "hide-sm"}, d.title), td,
+                el("td", {class: "num"}, `${d.ok} / ${d.n}`));
+      tbl.append(tr);
+    });
+    r.append(tbl);
+
+    const toggle = el("label", {class: "toggle"});
+    const cb = el("input", {type: "checkbox"});
+    cb.addEventListener("change", () => form.querySelectorAll(".q.correct").forEach(c => c.classList.toggle("hidden", cb.checked)));
+    toggle.append(cb, document.createTextNode("Show only the questions I got wrong"));
+    r.append(toggle);
+
+    const actions = el("div", {class: "actions"});
+    const retry = el("button", {class: "btn small", type: "button"}, "Retake this paper");
+    retry.addEventListener("click", resetPaper);
+    const print = el("button", {class: "btn small", type: "button"}, "Print or save as PDF");
+    print.addEventListener("click", () => window.print());
+    actions.append(retry, print);
+    r.append(actions);
+
+    document.getElementById("submit-row").classList.add("hidden");
+    window.scrollTo({top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"});
+    r.focus({preventScroll: true});
+  }
+
+  function resetPaper() {
+    clearInterval(tick);
+    submitted = false; deadline = null; tick = null; startedAt = null;
+    form.classList.remove("marked");
+    buildForm();
+    updateProgress();
+    document.getElementById("results").classList.add("hidden");
+    form.classList.add("hidden");
+    document.getElementById("submit-row").classList.add("hidden");
+    document.getElementById("start-card").classList.remove("hidden");
+    const t = document.getElementById("timer");
+    t.textContent = ""; t.classList.remove("low"); t.classList.add("hidden");
+    window.scrollTo(0, 0);
+  }
+
+  window.__exam = {mark, selected, sameSet, resetPaper};
+})();
+</script>
+</body>
+</html>

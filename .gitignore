@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Build output (the site is built and deployed by GitHub Actions)
+site/
+
+# Generated practice papers and exports
+DS_KnowledgeTest_Practice_*.html
+bank.json
+
+# Node (only needed for the optional browser tests)
+node_modules/
+package-lock.json
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local-only files not needed to run the app
+DEPLOYMENT.md
+methodology.md
+tests/
+package.json

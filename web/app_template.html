@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS Knowledge Test Practice</title>
+<meta name="description" content="Free, self-marking practice papers for the Data Scientist integrated degree apprenticeship (ST0585) knowledge test.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%231A2B48'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F4F7F6; --sheet: #FFFFFF; --ink: #1A2B48; --ink-2: #4A5A72; --rule: #C9D6E3; --rule-soft: #E3EAF1;
+    --mark: #D6456B; --pass: #1E7A57; --focus: #2F6FEB;
+    --sans: "Archivo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #10161F; --sheet: #17202C; --ink: #E6EDF5; --ink-2: #9FB0C4; --rule: #2E3D50; --rule-soft: #223042;
+      --mark: #FF7A98; --pass: #5FD3A2; --focus: #8DB4FF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #10161F; --sheet: #17202C; --ink: #E6EDF5; --ink-2: #9FB0C4; --rule: #2E3D50; --rule-soft: #223042;
+    --mark: #FF7A98; --pass: #5FD3A2; --focus: #8DB4FF;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  main { max-width: 760px; margin: 0 auto; padding: 0 16px 72px; }
+
+  /* Hero: the answer-sheet row */
+  .hero { padding: 64px 0 36px; }
+  .row { display: flex; gap: 10px; margin-bottom: 28px; }
+  .row span { width: 38px; height: 38px; border-radius: 50%; border: 1.75px solid var(--ink); display: grid; place-items: center;
+              font: 650 .95rem/1 var(--sans); font-stretch: 110%; }
+  .row span.fill { animation: fill .5s .5s ease-out forwards; }
+  @keyframes fill { to { background: var(--ink); color: var(--paper); } }
+  h1 { font-size: clamp(2.4rem, 8vw, 4rem); line-height: 1; font-weight: 800; font-stretch: 122%; letter-spacing: -.02em;
+       margin: 0 0 18px; max-width: 13ch; }
+  .lead { font: 400 1.15rem/1.55 var(--serif); color: var(--ink-2); margin: 0; max-width: 54ch; }
+
+  /* Form */
+  form { border-top: 1.5px solid var(--ink); }
+  .block { padding: 26px 0; border-bottom: 1px solid var(--rule); }
+  .block > h2 { font-size: 1.05rem; font-weight: 700; font-stretch: 110%; margin: 0 0 4px; }
+  .block > p { margin: 0 0 16px; color: var(--ink-2); font-size: .92rem; }
+  .fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .field label { display: block; font-weight: 650; font-size: .9rem; margin-bottom: 6px; }
+  .field input { width: 100%; font: 600 1.25rem/1 var(--sans); font-variant-numeric: tabular-nums; color: var(--ink);
+                 background: var(--sheet); border: 1.5px solid var(--rule); border-radius: 10px; padding: 12px; }
+  .field input:focus { border-color: var(--ink); outline: none; box-shadow: 0 0 0 3px var(--rule-soft); }
+  .field small { display: block; margin-top: 6px; color: var(--ink-2); font-size: .8rem; }
+
+  .chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; }
+  .chip { position: relative; display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px;
+          border: 1.5px solid var(--rule); background: var(--sheet); cursor: pointer; }
+  .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .chip .dot { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid var(--ink); }
+  .chip .k { font-weight: 750; font-stretch: 112%; font-variant-numeric: tabular-nums; }
+  .chip .t { font-size: .9rem; color: var(--ink-2); line-height: 1.3; }
+  .chip .n { margin-left: auto; font-size: .78rem; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .chip:has(input:checked) { border-color: var(--ink); }
+  .chip input:checked ~ .dot { background: var(--ink); box-shadow: inset 0 0 0 3px var(--sheet); }
+  .chip input:focus-visible ~ .dot { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .chip.wide { grid-column: 1 / -1; }
+  .linkrow { display: flex; gap: 16px; margin-bottom: 12px; font-size: .88rem; }
+  .linkbtn { background: none; border: 0; padding: 0; font: inherit; color: var(--ink); text-decoration: underline;
+             text-underline-offset: 3px; cursor: pointer; }
+  .options { display: grid; gap: 8px; }
+
+  .go { padding: 30px 0 0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn { font: 650 1rem/1 var(--sans); font-stretch: 108%; border-radius: 999px; padding: 15px 26px; cursor: pointer;
+         border: 1.5px solid var(--ink); background: transparent; color: var(--ink); }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn:hover { box-shadow: 0 0 0 3px var(--rule-soft); }
+  .btn.small { padding: 9px 16px; font-size: .88rem; }
+  .status { flex-basis: 100%; min-height: 1.4em; font-size: .9rem; color: var(--ink-2); }
+  .status.error { color: var(--mark); font-weight: 600; }
+
+  details { margin-top: 40px; border-top: 1px solid var(--rule); padding-top: 16px; }
+  summary { cursor: pointer; font-weight: 650; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: 12px; }
+  td { padding: 7px 0; border-bottom: 1px solid var(--rule-soft); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  footer { margin-top: 32px; font-size: .8rem; color: var(--ink-2); max-width: 62ch; }
+
+  /* Paper overlay */
+  #paper { position: fixed; inset: 0; background: var(--paper); display: none; flex-direction: column; z-index: 10; }
+  #paper.open { display: flex; }
+  #paper .bar { display: flex; gap: 8px; align-items: center; padding: 10px 16px; border-bottom: 1.5px solid var(--ink); background: var(--paper); }
+  #paper .bar .spacer { flex: 1; }
+  #paper iframe { flex: 1; width: 100%; border: 0; background: var(--paper); }
+
+  @media (max-width: 600px) {
+    .hero { padding-top: 40px; }
+    .fields { grid-template-columns: 1fr 1fr; }
+    .fields .field:last-child { grid-column: 1 / -1; }
+    .chips { grid-template-columns: 1fr; }
+    #paper .bar .btn { padding: 8px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .row span.fill { animation: none; background: var(--ink); color: var(--paper); } }
+</style>
+</head>
+<body>
+<main id="settings">
+  <section class="hero">
+    <div class="row" aria-hidden="true"><span>A</span><span>B</span><span class="fill">C</span><span>D</span></div>
+    <h1>Practise the knowledge test</h1>
+    <p class="lead">Self-marking papers for the Data Scientist apprenticeship (ST0585), built from <span id="bank-count">700+</span> questions on KSBs 3.1 to 5.3. Sit one here, or download it to sit offline.</p>
+  </section>
+
+  <form id="settings-form" onsubmit="return false">
+    <div class="block">
+      <h2>Paper</h2>
+      <p>The real test is 30 questions in an hour, closed book.</p>
+      <div class="fields">
+        <div class="field">
+          <label for="n">Questions</label>
+          <input id="n" type="number" min="5" max="100" value="30" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label for="pass">Pass mark %</label>
+          <input id="pass" type="number" min="1" max="100" value="60" inputmode="numeric">
+          <small id="pass-hint">18 of 30</small>
+        </div>
+        <div class="field">
+          <label for="timer">Timer, minutes</label>
+          <input id="timer" type="number" min="0" max="300" placeholder="Off" inputmode="numeric">
+          <small>Leave empty for untimed</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Topics</h2>
+      <p>Each paper spreads its questions evenly across the topics you choose.</p>
+      <div class="linkrow"><button type="button" class="linkbtn" id="all">Select all</button><button type="button" class="linkbtn" id="none">Clear</button></div>
+      <div class="chips" id="areas"></div>
+    </div>
+
+    <div class="block">
+      <h2>Extras</h2>
+      <p>Optional ways to stretch yourself.</p>
+      <div class="options">
+        <label class="chip wide" id="general-chip">
+          <input type="checkbox" id="general">
+          <span class="dot"></span>
+          <span class="t"><span class="k" style="color:var(--ink)">General data science</span><br>Python, SQL, experiments, visualisation and ethics beyond the assessed KSBs</span>
+          <span class="n" id="general-n"></span>
+        </label>
+        <label class="chip wide">
+          <input type="checkbox" id="hide-count">
+          <span class="dot"></span>
+          <span class="t"><span class="k" style="color:var(--ink)">Harder mode</span><br>Don't say how many options to select</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="go">
+      <button class="btn primary" id="go" type="button">Start paper</button>
+      <button class="btn" id="dl" type="button">Download paper</button>
+      <span class="status" id="error" role="status"></span>
+    </div>
+  </form>
+
+  <details>
+    <summary>What's in the question bank</summary>
+    <table id="bank-table"><tbody></tbody></table>
+    <p style="font-size:.88rem;color:var(--ink-2)">New papers avoid questions you've already seen in this browser until you've worked through a topic.
+      <button type="button" class="linkbtn" id="reset-seen">Forget seen questions</button></p>
+  </details>
+
+  <footer>
+    Unofficial practice questions written from the published KSBs, not the assessment organisation's question bank.
+    KSB wording is Crown copyright, reused under the Open Government Licence v3.0. Updated <span id="built"></span>.
+  </footer>
+</main>
+
+<div id="paper" aria-hidden="true">
+  <div class="bar">
+    <button class="btn small" id="back" type="button">Back to settings</button>
+    <span class="spacer"></span>
+    <button class="btn small" id="download" type="button">Download</button>
+    <button class="btn small primary" id="again" type="button">New paper</button>
+  </div>
+  <iframe id="frame" title="Practice paper"></iframe>
+</div>
+
+<script>
+const BANK = /*__BANK__*/[];
+const AREAS = /*__AREAS__*/{};
+const EXAM_TEMPLATE = /*__TEMPLATE__*/"";
+const BUILT = /*__BUILT__*/"";
+
+(function () {
+  "use strict";
+  const GENERAL = "GEN";
+  const SHORT = {
+    "3.1": "Processing and storage", "3.2": "Database systems", "3.3": "Evidence and decisions",
+    "4.1": "Statistics and maths", "4.2": "ML, AI and optimisation", "4.3": "Vision and language",
+    "4.4": "Constraints and trade-offs", "4.5": "Development standards", "5.1": "Data sources",
+    "5.2": "Formats and delivery", "5.3": "Real-world data patterns",
+  };
+  const $ = id => document.getElementById(id);
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } },
+  };
+
+  // ---------- Helpers ----------
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function shuffle(arr, rnd) {
+    for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; }
+    return arr;
+  }
+  function b64(str) {
+    const bytes = new TextEncoder().encode(str);
+    let bin = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(bin);
+  }
+  const escHtml = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  function status(msg, isError) { const s = $("error"); s.textContent = msg; s.classList.toggle("error", !!isError); }
+
+  // ---------- Settings UI ----------
+  const byArea = {};
+  BANK.forEach(q => (byArea[q.ksb] = byArea[q.ksb] || []).push(q));
+  const assessed = Object.keys(AREAS).filter(k => k !== GENERAL);
+  const saved = store.get("dsq-settings", {});
+  $("bank-count").textContent = BANK.length;
+  $("built").textContent = BUILT;
+
+  assessed.forEach(k => {
+    const lab = document.createElement("label");
+    lab.className = "chip"; lab.title = AREAS[k];
+    const cb = document.createElement("input");
+    cb.type = "checkbox"; cb.value = k; cb.className = "area";
+    cb.checked = saved.areas ? saved.areas.includes(k) : true;
+    const dot = document.createElement("span"); dot.className = "dot";
+    const txt = document.createElement("span"); txt.className = "t";
+    const key = document.createElement("span"); key.className = "k"; key.style.color = "var(--ink)"; key.textContent = k + " ";
+    txt.append(key, document.createTextNode(SHORT[k] || AREAS[k]));
+    const n = document.createElement("span"); n.className = "n"; n.textContent = byArea[k].length;
+    lab.append(cb, dot, txt, n);
+    $("areas").append(lab);
+  });
+  if (byArea[GENERAL]) $("general-n").textContent = byArea[GENERAL].length;
+  else $("general-chip").remove();
+
+  if (saved.n) $("n").value = saved.n;
+  if (saved.pass) $("pass").value = saved.pass;
+  if (saved.timer) $("timer").value = saved.timer;
+  if ($("general")) $("general").checked = !!saved.general;
+  $("hide-count").checked = !!saved.hideCount;
+
+  function passHint() {
+    const n = Math.round(+$("n").value || 30), p = +$("pass").value || 60;
+    $("pass-hint").textContent = `${Math.max(1, Math.min(n, Math.ceil(+(n * p / 100).toFixed(9))))} of ${n}`;
+  }
+  $("n").addEventListener("input", passHint); $("pass").addEventListener("input", passHint); passHint();
+  $("all").onclick = () => document.querySelectorAll(".area").forEach(c => (c.checked = true));
+  $("none").onclick = () => document.querySelectorAll(".area").forEach(c => (c.checked = false));
+  $("reset-seen").onclick = () => { store.set("dsq-seen", {}); status("Seen-question history cleared."); };
+
+  const tbody = document.querySelector("#bank-table tbody");
+  Object.keys(AREAS).forEach(k => {
+    const tr = document.createElement("tr");
+    const a = document.createElement("td"); a.textContent = k === GENERAL ? "General data science (optional)" : `${k} ${SHORT[k] || ""}`;
+    const n = document.createElement("td"); n.className = "num"; n.textContent = byArea[k].length;
+    tr.append(a, n); tbody.append(tr);
+  });
+  const tot = document.createElement("tr");
+  tot.innerHTML = `<td><strong>Total</strong></td><td class="num"><strong>${BANK.length}</strong></td>`;
+  tbody.append(tot);
+
+  function readSettings() {
+    return {
+      n: Math.round(+$("n").value || 30),
+      pass: +$("pass").value || 60,
+      timer: Math.max(0, Math.round(+$("timer").value || 0)),
+      areas: [...document.querySelectorAll(".area:checked")].map(c => c.value),
+      general: $("general") ? $("general").checked : false,
+      hideCount: $("hide-count").checked,
+    };
+  }
+
+  // ---------- Paper generation (mirrors generate_exams.py) ----------
+  function buildPaper(s) {
+    const areas = s.areas.concat(s.general ? [GENERAL] : []);
+    if (!areas.length) throw new Error("Choose at least one topic, or turn on general data science.");
+    if (s.n < 1 || s.n > 200) throw new Error("Questions must be between 1 and 200.");
+    if (s.pass <= 0 || s.pass > 100) throw new Error("Pass mark must be between 1 and 100%.");
+    const seed = Math.floor(Math.random() * 1e6);
+    const rnd = mulberry32(seed);
+    const caps = {};
+    areas.forEach(k => (caps[k] = new Set(byArea[k].map(q => q.concept)).size));
+    const n = Math.min(s.n, areas.reduce((t, k) => t + caps[k], 0));
+
+    const order = shuffle(areas.slice(), rnd);
+    const quota = Object.fromEntries(areas.map(k => [k, 0]));
+    let left = n;
+    while (left) {
+      let moved = false;
+      for (const k of order) if (left && quota[k] < caps[k]) { quota[k]++; left--; moved = true; }
+      if (!moved) break;
+    }
+
+    const seen = store.get("dsq-seen", {});
+    let picked = [];
+    areas.forEach(k => {
+      const seenSet = new Set(seen[k] || []);
+      const pool = shuffle(byArea[k].slice(), rnd);
+      const ordered = pool.filter(q => !seenSet.has(q.id)).concat(pool.filter(q => seenSet.has(q.id)));
+      const concepts = new Set(), take = [];
+      for (const q of ordered) {
+        if (take.length >= quota[k]) break;
+        if (!concepts.has(q.concept)) { concepts.add(q.concept); take.push(q); }
+      }
+      const unseenLeft = pool.filter(q => !seenSet.has(q.id) && !take.includes(q)).length;
+      seen[k] = unseenLeft < quota[k] ? take.map(q => q.id) : [...seenSet, ...take.map(q => q.id)];
+      picked = picked.concat(take);
+    });
+    store.set("dsq-seen", seen);
+    shuffle(picked, rnd);
+
+    const questions = picked.map(q => {
+      const idx = shuffle([0, 1, 2, 3], rnd);
+      return {...q, options: idx.map(i => q.options[i]), answer: q.answer.map(a => idx.indexOf(a)).sort()};
+    });
+    const passMark = Math.max(1, Math.min(n, Math.ceil(+(n * s.pass / 100).toFixed(9))));
+    return {
+      paper_id: `web-${seed}`,
+      generated: new Date().toLocaleString("en-GB", {day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"}),
+      bank_size: areas.reduce((t, k) => t + byArea[k].length, 0),
+      time_limit_min: s.timer,
+      pass_mark: passMark,
+      hide_answer_count: s.hideCount,
+      questions: questions.map(q => ({id: q.id, ksb: q.ksb, ksb_title: q.ksb_title, question: q.question,
+                                      options: q.options, select: q.answer.length})),
+      key: b64(JSON.stringify({answers: questions.map(q => q.answer), explanations: questions.map(q => q.explanation)})),
+      _title: "Data Scientist Knowledge Test practice paper",
+    };
+  }
+
+  function renderHtml(exam) {
+    const data = {...exam}; delete data._title;
+    const payload = JSON.stringify(data).replace(/<\//g, "<\\/");
+    return EXAM_TEMPLATE
+      .replace("/*__EXAM_DATA__*/null", () => payload)
+      .replace("__SHORT_TITLE__", () => escHtml(`Practice paper ${exam.paper_id}`))
+      .split("__TITLE__").join(escHtml(exam._title));
+  }
+
+  function newPaper() {
+    status("");
+    const s = readSettings();
+    store.set("dsq-settings", s);
+    try {
+      const exam = buildPaper(s);
+      return {html: renderHtml(exam), id: exam.paper_id};
+    } catch (e) { status(e.message, true); return null; }
+  }
+
+  // ---------- Download: the user chooses where the file goes ----------
+  async function saveFile(html, id) {
+    const name = `DS_KnowledgeTest_Practice_${id}.html`;
+    if (window.showSaveFilePicker) {
+      try {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: name,
+          types: [{description: "Practice paper (HTML)", accept: {"text/html": [".html"]}}],
+        });
+        const w = await handle.createWritable();
+        await w.write(new Blob([html], {type: "text/html"}));
+        await w.close();
+        return `Saved ${handle.name}. Open it in any browser to sit the paper offline.`;
+      } catch (e) {
+        if (e && e.name === "AbortError") return "Download cancelled.";
+        // Fall through to a normal download if the picker isn't allowed here.
+      }
+    }
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([html], {type: "text/html"}));
+    a.download = name;
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    return `Downloading ${name}. Your browser decides where it's saved, or asks you.`;
+  }
+
+  // ---------- Paper overlay ----------
+  let current = null;
+  function openPaper() {
+    current = newPaper();
+    if (!current) return;
+    $("frame").srcdoc = current.html;
+    $("paper").classList.add("open");
+    $("paper").setAttribute("aria-hidden", "false");
+    $("settings").setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "hidden";
+  }
+  function closePaper() {
+    $("paper").classList.remove("open");
+    $("paper").setAttribute("aria-hidden", "true");
+    $("settings").removeAttribute("aria-hidden");
+    document.body.style.overflow = "";
+    $("frame").srcdoc = "";
+  }
+  $("go").onclick = openPaper;
+  $("dl").onclick = async () => { const p = newPaper(); if (p) status(await saveFile(p.html, p.id)); };
+  $("download").onclick = async () => { if (current) await saveFile(current.html, current.id); };
+  $("again").onclick = () => { if (confirm("Start a new paper? Your answers on this one will be lost.")) openPaper(); };
+  $("back").onclick = () => { if (confirm("Leave this paper? Your answers will be lost.")) closePaper(); };
+
+  window.__app = {buildPaper, renderHtml, readSettings, saveFile};
+})();
+</script>
+</body>
+</html>
