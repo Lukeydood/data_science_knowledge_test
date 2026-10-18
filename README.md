@@ -6,6 +6,7 @@ Free, self-marking practice papers for the **Data Scientist integrated degree ap
 - Every paper covers every KSB, with options shuffled and no repeated concepts
 - Answers are written so the correct option can't be spotted by length or wording (checked automatically)
 - Marks itself: score out of 30, **PASS/FAIL against a 60% pass mark (18/30)**, wrong answers highlighted in red with the correct answer and an explanation, and a per-KSB breakdown
+- After marking, each question suggests a broad-theme Google search (with a copy button) for further reading, e.g. *cognitive biases in decision making*
 - Untimed by default
 - Use it as a **web app** (GitHub Pages), or generate HTML papers with Python and save them wherever you choose – no installs beyond Python 3.9+
 
@@ -74,6 +75,7 @@ web/app_template.html    Web app settings page; embeds the bank and paper templa
 question_bank/
   ksb_*.py               Assessed KSB questions (3.1–5.3), two modules per KSB
   gen_*.py               Optional general data science questions
+  themes.py              Broad-theme Google search for each concept (shown after marking)
   cues.py                Checks that answers can't be guessed from length/wording
 .github/workflows/pages.yml   Validate on every push/PR; deploy to Pages from main
 ```
@@ -90,6 +92,7 @@ q("concept-tag", "Which TWO ...?",
 
 - Reuse a concept tag for a variant of an existing idea (variants never appear on the same paper).
 - Write "TWO" or "THREE" in capitals in multi-answer questions.
+- Add any new concept tag to a broad theme in `question_bank/themes.py` (the check fails if one is missing).
 - Keep options parallel and similar in length, and avoid absolute words ("always", "never") in wrong options.
 
 Then check the bank and preview the site:

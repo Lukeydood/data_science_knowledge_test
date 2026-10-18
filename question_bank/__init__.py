@@ -5,11 +5,14 @@ Every module in this package named `ksb_*.py` (assessed KSBs 3.1–5.3) or
 New modules are picked up automatically.
 
 `load_bank()` returns every question as a dict with keys:
-    id, ksb, ksb_title, concept, question, options (4), answer (list of indexes), explanation
+    id, ksb, ksb_title, concept, question, options (4), answer (list of indexes), explanation,
+    search (a broad-theme Google search phrase, shown after marking)
 """
 
 import importlib
 import pkgutil
+
+from .themes import CONCEPT_THEME
 
 GENERAL = "GEN"
 _COUNT_WORDS = {2: "TWO", 3: "THREE"}
@@ -26,7 +29,7 @@ def _modules():
 
 
 def load_bank():
-    bank = [q for m in _modules() for q in m.QUESTIONS]
+    bank = [dict(q, search=CONCEPT_THEME.get(q["concept"], "")) for m in _modules() for q in m.QUESTIONS]
     bank.sort(key=lambda q: (_ksb_sort_key(q["ksb"]), q["id"]))
     validate(bank)
     return bank
@@ -69,10 +72,15 @@ def validate(bank):
             errors.append(f"{qid}: says TWO/THREE but has a single answer")
         if not q["explanation"]:
             errors.append(f"{qid}: missing explanation")
+        if not q.get("search"):
+            errors.append(f"{qid}: concept {q['concept']!r} has no search theme in question_bank/themes.py")
         for opt in q["options"]:
             low = opt.lower()
             if "all of the above" in low or "none of the above" in low or "both a and b" in low:
                 errors.append(f"{qid}: avoid 'all/none of the above' (options are shuffled)")
+    unused = set(CONCEPT_THEME) - {q["concept"] for q in bank}
+    if unused and len({q["ksb"] for q in bank}) == len({k.split(":")[0] for k in CONCEPT_THEME}):
+        errors.append(f"themes.py lists concepts not in the bank: {sorted(unused)}")
     if errors:
         raise ValueError("Question bank errors:\n  " + "\n  ".join(errors))
     return bank

@@ -103,6 +103,15 @@
   .opt.chosen-wrong .tag { color: var(--mark); }
   .explain { margin-top: 12px; padding: 12px 14px; border-left: 2px solid var(--rule); font-size: .95rem; color: var(--ink); max-width: 66ch; }
   .explain strong { font-weight: 650; }
+  .search { margin-top: 10px; }
+  .search-label { display: block; font-size: .82rem; color: var(--ink-2); margin-bottom: 5px; }
+  .search-box { display: flex; align-items: stretch; max-width: 100%; border: 1.5px solid var(--rule); border-radius: 10px;
+                background: var(--sheet); overflow: hidden; }
+  .search-text { flex: 1; min-width: 0; padding: 8px 10px; font: 500 .92rem/1.4 var(--sans); color: var(--ink);
+                 user-select: all; overflow-wrap: anywhere; }
+  .copy { flex: none; border: 0; border-left: 1.5px solid var(--rule); background: transparent; color: var(--ink);
+          font: 650 .85rem/1 var(--sans); padding: 0 14px; cursor: pointer; min-width: 72px; }
+  .copy:hover { background: var(--rule-soft); }
 
   #submit-row { padding: 32px 0 0; }
 
@@ -336,9 +345,34 @@ const EXAM = /*__EXAM_DATA__*/null;
       });
       const ex = el("div", {class: "explain"});
       ex.append(el("strong", null, "Why: "), document.createTextNode(key.explanations[i]));
+      const search = (key.searches || [])[i];
+      if (search) {
+        const row = el("div", {class: "search"});
+        row.append(el("span", {class: "search-label"}, "To read more, search Google for:"));
+        const box = el("div", {class: "search-box"});
+        const text = el("code", {class: "search-text"}, search);
+        const copy = el("button", {class: "copy", type: "button", "aria-label": `Copy search: ${search}`}, "Copy");
+        copy.addEventListener("click", () => copyText(search, copy));
+        box.append(text, copy);
+        row.append(box);
+        ex.append(row);
+      }
       card.querySelector(".q-body").append(ex);
     });
     renderResults(score, results, byKsb, timedOut, usedMs);
+  }
+
+  function copyText(text, btn) {
+    const done = ok => { btn.textContent = ok ? "Copied" : "Select and copy"; setTimeout(() => (btn.textContent = "Copy"), 1600); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => done(true), () => done(fallback()));
+    } else done(fallback());
+    function fallback() {
+      try {
+        const ta = el("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.append(ta); ta.select(); const ok = document.execCommand("copy"); ta.remove(); return ok;
+      } catch (e) { return false; }
+    }
   }
 
   function renderResults(score, results, byKsb, timedOut, usedMs) {

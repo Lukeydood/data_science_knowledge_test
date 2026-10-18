@@ -347,7 +347,8 @@ const BUILT = /*__BUILT__*/"";
       hide_answer_count: s.hideCount,
       questions: questions.map(q => ({id: q.id, ksb: q.ksb, ksb_title: q.ksb_title, question: q.question,
                                       options: q.options, select: q.answer.length})),
-      key: b64(JSON.stringify({answers: questions.map(q => q.answer), explanations: questions.map(q => q.explanation)})),
+      key: b64(JSON.stringify({answers: questions.map(q => q.answer), explanations: questions.map(q => q.explanation),
+                                searches: questions.map(q => q.search || "")})),
       _title: "Data Scientist Knowledge Test practice paper",
     };
   }

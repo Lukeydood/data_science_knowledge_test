@@ -169,6 +169,7 @@ def render_html(questions: list[dict], *, paper_id: str, title: str, time_limit:
     key = {
         "answers": [q["answer"] for q in questions],
         "explanations": [q["explanation"] for q in questions],
+        "searches": [q.get("search", "") for q in questions],
     }
     data = {
         "paper_id": paper_id,
