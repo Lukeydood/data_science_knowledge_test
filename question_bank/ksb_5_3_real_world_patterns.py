@@ -15,21 +15,21 @@ q("missingness", "Older respondents are more likely to skip an online question, 
 q("imputation", "What is a known drawback of replacing missing values with the column mean?",
   ["It shrinks variance and weakens relationships", "It inflates the variance and creates new outliers", "It shifts the column mean towards zero", "It changes the number of rows in the data"],
   "A", "Mean imputation reduces spread and ignores relationships; consider multiple imputation or model-based methods.")
-q("placeholder-values", "A river level column contains many values of −999. What is the most likely explanation?",
-  ["A placeholder code for missing or invalid readings", "A genuine reading taken during an extreme drought", "A reading recorded in feet instead of metres", "A rounding artefact from the logger's firmware"],
+q("placeholder-values", "A temperature column contains many values of −999. What is the most likely explanation?",
+  ["A placeholder code for missing or invalid readings", "A genuine reading taken during an extreme cold snap", "A reading recorded in Fahrenheit, not Celsius", "A rounding artefact from the logger's firmware"],
   "A", "Sentinel values such as −999, 9999 or 1900-01-01 must be converted to proper missing values before analysis.")
 
 # --- Outliers & anomalies ------------------------------------------------------------------
-q("outliers", "A rainfall dataset contains a value five times higher than any other. What should an analyst do first?",
+q("outliers", "A daily sales dataset contains one value five times higher than any other. What should an analyst do first?",
   ["Remove it, as it will distort the summary statistics", "Investigate it with source checks and domain knowledge", "Cap it at the 99th percentile to reduce its influence", "Replace it with the median of the surrounding days"],
-  "B", "Outliers can be the most important data (e.g. a flood); investigate before removing, capping or replacing, and document the decision.")
+  "B", "Outliers can be the most important data (e.g. a Black Friday sale); investigate before removing, capping or replacing, and document the decision.")
 q("anomaly-detection", "Which TWO methods can be used to detect anomalies?",
   ["Z-score or IQR rules", "Isolation Forest", "One-hot encoding", "Min–max scaling"],
   "AB", "Statistical rules and ML methods (Isolation Forest, autoencoders) flag unusual observations; the others are preprocessing steps.")
 
 # --- Distributions -------------------------------------------------------------------------
 q("skew", "Which TWO real-world variables are typically right-skewed?",
-  ["Household income", "River discharge", "Adult height in one population", "Measurement error of a calibrated gauge"],
+  ["Household income", "Insurance claim amounts", "Adult height in one population", "Measurement error of a calibrated gauge"],
   "AB", "Quantities bounded at zero with occasional large values are right-skewed; height and well-behaved measurement error are roughly symmetric.")
 q("power-law", "City populations and website traffic often show a few very large values and many small ones. This is characteristic of:",
   ["Heavy-tailed (power-law) distributions", "Uniform (flat) distributions", "Normal (bell-shaped) distributions", "Bimodal (two-peaked) distributions"],
@@ -43,7 +43,7 @@ q("bimodal", "A histogram of journey times has two distinct peaks. What does thi
 q("benford", "Benford's law predicts that in many naturally occurring numerical datasets the leading digit is:",
   ["Equally likely to be any digit from 1 to 9", "1 about 30% of the time, with larger digits rarer", "9 about 30% of the time, with smaller digits rarer", "Most likely to be 5, falling away symmetrically"],
   "B", "Deviations from Benford's distribution can flag fabricated or manipulated figures.")
-q("zero-inflation", "Daily counts of pollution incidents at a small site are mostly zero with occasional counts. This pattern is called:",
+q("zero-inflation", "Daily counts of insurance claims at a small branch are mostly zero with occasional counts. This pattern is called:",
   ["Zero-inflation", "Left-censoring", "Heteroscedasticity", "Seasonality"],
   "A", "Zero-inflated models (e.g. ZIP) handle excess zeros beyond a standard Poisson.")
 q("heaping", "Self-reported ages cluster at numbers ending in 0 and 5. This is known as:",
@@ -51,7 +51,7 @@ q("heaping", "Self-reported ages cluster at numbers ending in 0 and 5. This is k
   "A", "Digit preference in reported data creates spikes at round numbers.")
 
 # --- Time and space --------------------------------------------------------------------------
-q("seasonality", "Water demand is consistently higher every summer and lower every winter. This is:",
+q("seasonality", "Ice-cream sales are consistently higher every summer and lower every winter. This is:",
   ["Seasonality", "A cyclical pattern", "A long-term trend", "A structural break"],
   "A", "Seasonality is a regular, calendar-related pattern repeating with a fixed period.")
 q("trend-cycle", "How does a cyclical pattern differ from a seasonal pattern?",
@@ -60,7 +60,7 @@ q("trend-cycle", "How does a cyclical pattern differ from a seasonal pattern?",
 q("autocorrelation", "Why should standard random train/test splits be avoided for time-series forecasting?",
   ["Ordering matters, so random splits let the future leak into training", "Time-series data usually has too few rows to split into train and test", "Random splits make the test set larger than the training set", "Time-series models are evaluated on training error instead"],
   "A", "Use time-ordered splits (e.g. rolling-origin / time-series cross-validation).")
-q("spatial-autocorrelation", "Nearby monitoring sites tend to record more similar values than distant ones. This is:",
+q("spatial-autocorrelation", "Nearby houses tend to sell for more similar prices than distant ones. This is:",
   ["Spatial autocorrelation", "Spatial non-stationarity", "The ecological fallacy", "Edge effects"],
   "A", "Tobler's first law; spatial dependence violates independence assumptions and must be accounted for in modelling and validation.")
 q("drift-real-world", "A model trained on pre-pandemic travel data performs poorly afterwards. Which real-world pattern explains this?",
@@ -78,12 +78,12 @@ q("inconsistent-categories", "A 'town' column contains 'Bristol', 'bristol ', 'B
   ["Standardise case and trim whitespace", "Map variants to a canonical value, with review", "One-hot encode each spelling as its own town", "Drop rows whose town appears fewer than ten times"],
   "AB", "Inconsistent categorical values must be harmonised; encoding or dropping them hides the problem.")
 q("class-imbalance", "Which real-world scenario typically produces highly imbalanced classes?",
-  ["Detecting rare fraud or pollution events", "Predicting a fair coin toss outcome", "A survey with equal-sized strata by design", "Classifying photos of cats and dogs equally sampled"],
+  ["Detecting rare fraud or equipment failures", "Predicting a fair coin toss outcome", "A survey with equal-sized strata by design", "Classifying photos of cats and dogs equally sampled"],
   "A", "Rare events dominate many important problems, requiring suitable metrics and methods.")
 q("heteroscedasticity", "In a regression of costs on project size, residuals become much more spread out for larger projects. This is:",
   ["Heteroscedasticity", "Homoscedasticity", "Autocorrelation", "Multicollinearity of predictors"],
   "A", "Non-constant variance; consider transformations or robust standard errors.")
-q("multicollinearity-real", "Rainfall over the last 1, 2 and 3 days are used together as predictors and are highly correlated. What problem may arise?",
+q("multicollinearity-real", "Sales over the last 1, 2 and 3 days are used together as predictors and are highly correlated. What problem may arise?",
   ["Unstable, hard-to-interpret coefficients", "Residuals that grow with the fitted values", "Predictions biased towards the mean", "Too few degrees of freedom to fit"],
   "A", "Multicollinearity inflates coefficient variance; the second option is heteroscedasticity.")
 q("censoring", "In a study of how long equipment lasts, some units are still working when the study ends, so their failure time is unknown. This is:",
@@ -98,6 +98,6 @@ q("measurement-error", "A sensor's readings slowly increase over months even tho
 q("aggregation", "Rates look very different when calculated at regional versus local-authority level, purely because of how boundaries group the data. This is known as:",
   ["The modifiable areal unit problem", "Spatial autocorrelation between areas", "The ecological fallacy", "Simpson's paradox in rates"],
   "A", "MAUP: results of spatial analysis depend on the scale and boundaries of aggregation units. The ecological fallacy is inferring individual behaviour from group data.")
-q("survivorship-data", "A dataset of currently active permits is used to estimate average permit duration. What bias may arise?",
+q("survivorship-data", "A dataset of currently active subscriptions is used to estimate average subscription length. What bias may arise?",
   ["Survivorship bias", "Recall bias", "Observer bias", "Measurement bias in records"],
-  "A", "Expired or revoked permits are missing (and long-running ones over-represented), distorting the estimate.")
+  "A", "Cancelled subscriptions are missing (and long-running ones over-represented), distorting the estimate.")

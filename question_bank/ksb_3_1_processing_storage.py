@@ -20,7 +20,7 @@ q("serverless", "Which TWO statements describe serverless computing (e.g. Azure 
 q("shared-responsibility", "Under the cloud shared responsibility model, who is normally responsible for classifying and controlling access to the data a customer uploads to an IaaS or PaaS service?",
   ["The cloud provider", "The customer", "The provider and an independent auditor", "The regional data protection authority"],
   "B", "Providers secure the cloud itself (physical, host, network); customers remain responsible for their data, identities and access configuration.")
-q("data-sovereignty", "A UK public body must ensure personal data is held under UK jurisdiction. Which concept does this requirement relate to most directly?",
+q("data-sovereignty", "A UK bank must ensure customer data is held under UK jurisdiction. Which concept does this requirement relate to most directly?",
   ["Data lineage", "Data residency", "Data redundancy", "Data elasticity"],
   "B", "Data sovereignty/residency concerns the legal jurisdiction and physical location where data is stored and processed. Cloud providers address it through region selection.")
 
@@ -31,7 +31,7 @@ q("onprem-vs-cloud", "Which TWO are typical advantages of on-premise infrastruct
 q("capex-opex", "Migrating from on-premise servers to public cloud typically shifts IT spending in which way?",
   ["From operational to capital expenditure", "From capital to operational expenditure", "From variable to fixed annual licensing", "From pay-per-use to up-front purchasing"],
   "B", "Cloud replaces up-front hardware purchases (CapEx) with pay-as-you-go consumption (OpEx).")
-q("elasticity", "A web service automatically adds compute instances during a flood-warning surge and removes them when demand falls. Which cloud characteristic is this?",
+q("elasticity", "A web service automatically adds compute instances during a Black Friday sales surge and removes them when demand falls. Which cloud characteristic is this?",
   ["Elasticity", "Durability", "Redundancy", "Portability"],
   "A", "Elasticity is the ability to automatically provision and de-provision resources to match demand.")
 q("hybrid-cloud", "What best describes a hybrid cloud architecture?",
@@ -46,10 +46,10 @@ q("spot-instances", "What is the main trade-off of using spot / pre-emptible clo
 
 # --- Processing paradigms --------------------------------------------------
 q("batch-vs-stream", "Which workload is best suited to batch processing rather than stream processing?",
-  ["Flagging fraudulent card payments as they occur", "Producing the monthly payroll report", "Alerting when a river gauge exceeds a threshold", "Updating a live dashboard of website clicks"],
+  ["Flagging fraudulent card payments as they occur", "Producing the monthly payroll report", "Alerting when a server's CPU exceeds a threshold", "Updating a live dashboard of website clicks"],
   "B", "Batch processing handles bounded datasets on a schedule where latency is not critical. The others require low-latency, continuous (stream) processing.")
 q("batch-vs-stream", "Which TWO scenarios most need stream (real-time) processing?",
-  ["Alerting on pumping-station telemetry that shows a failure", "Compiling the annual statutory accounts", "Detecting suspicious logins as they happen", "Building a quarterly archive of historic emails"],
+  ["Alerting on factory-machine telemetry that shows a failure", "Compiling the annual statutory accounts", "Detecting suspicious logins as they happen", "Building a quarterly archive of historic emails"],
   "AC", "Streaming is needed when value depends on reacting within seconds; periodic reporting and archiving are batch tasks.")
 q("etl-elt", "What distinguishes ELT from ETL?",
   ["ELT transforms data in a staging server before loading it", "ELT loads raw data first and transforms it in the target", "ELT skips transformation and loads data unchanged", "ELT extracts data in real time using change capture"],
@@ -91,7 +91,7 @@ q("partitioning", "A large table of sensor readings is partitioned by date. What
 q("containers", "How do containers (e.g. Docker) differ from virtual machines?",
   ["Each container runs its own full guest operating system", "Containers share the host OS kernel, so they are lighter", "Containers emulate hardware through a type-1 hypervisor", "Containers need a dedicated physical server per instance"],
   "B", "VMs virtualise hardware and each run a full OS; containers isolate processes while sharing the host kernel.")
-q("edge-computing", "Remote river-level sensors have limited bandwidth, so readings are pre-processed on a device near the sensor before summaries are sent. This is an example of:",
+q("edge-computing", "Sensors on delivery vans have limited mobile bandwidth, so readings are pre-processed on a device in each van before summaries are sent. This is an example of:",
   ["Edge computing", "Fog storage", "Data federation", "Vertical scaling"],
   "A", "Edge computing processes data close to its source to reduce latency and bandwidth.")
 

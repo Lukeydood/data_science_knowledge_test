@@ -47,8 +47,8 @@ q("unix-time", "A column contains values such as 1767225600. This is most likely
 q("leading-zeros", "Identifiers such as '01234' lose their leading zero after loading. How should this be prevented?",
   ["Read the column as text (string dtype)", "Multiply the column by ten after loading", "Sort the column before saving it again", "Convert the column to floating point"],
   "A", "IDs are labels, not numbers; read them as strings.")
-q("nested-structure", "Each permit record contains a list of conditions of varying length. Which TWO tabular representations are reasonable?",
-  ["A separate conditions table linked by permit ID", "An exploded long table with one row per condition", "Fixed columns condition_1 … condition_500", "Concatenating everything into one cell"],
+q("nested-structure", "Each online order contains a list of items of varying length. Which TWO tabular representations are reasonable?",
+  ["A separate items table linked by order ID", "An exploded long table with one row per item", "Fixed columns item_1 … item_500", "Concatenating everything into one cell"],
   "AB", "Normalise or explode nested lists; wide fixed columns and concatenation are hard to analyse.")
 q("audio-video", "Which TWO are typical first steps to make audio recordings analysable?",
   ["Transcribe speech to text", "Extract features such as spectrograms", "Open the files in a spreadsheet", "Sort files by colour"],

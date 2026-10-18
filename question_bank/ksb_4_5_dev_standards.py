@@ -70,9 +70,6 @@ q("reproducibility-env", "Which TWO practices help ensure a Python analysis can 
 q("docker", "What problem does containerising an application with Docker mainly solve?",
   ["Inconsistent environments between development and deployment", "Tracking changes to code made by different developers", "Scaling a database across several physical servers in a cluster", "Scheduling pipeline tasks in the right order"],
   "A", "Containers package code with its dependencies and runtime. The others are solved by version control, distributed databases and orchestrators.")
-q("rap", "Reproducible Analytical Pipelines (RAP), promoted across UK government, aim to:",
-  ["Replace manual spreadsheet processes with tested, version-controlled code", "Standardise all government analysis on a single commercial analytics platform", "Publish all analytical outputs as open data within one month", "Require every model to be independently audited before use"],
-  "A", "RAP improves the quality, speed and auditability of analysis through automation and good software practice.")
 q("notebooks", "What is a known risk of relying on Jupyter notebooks for production code?",
   ["Hidden state and out-of-order execution hurt reproducibility", "They are unable to import third-party Python packages", "They run code noticeably more slowly than an equivalent .py script", "They store outputs in a format Git is unable to track"],
   "A", "Refactor stable logic into tested modules; keep notebooks for exploration and reporting. Notebooks are JSON, which Git tracks (if noisily).")

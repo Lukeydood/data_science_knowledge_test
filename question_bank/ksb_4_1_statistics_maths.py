@@ -35,7 +35,7 @@ q("bayes", "A disease affects 1% of people. A test has 99% sensitivity and 95% s
 q("bayes", "In Bayesian inference, what is the posterior distribution?",
   ["The belief about parameters before seeing any data", "The updated belief after combining prior and likelihood", "The probability of the data given the parameters", "The distribution of the statistic over repeated samples"],
   "B", "Posterior ∝ likelihood × prior. The first option is the prior, the third the likelihood, the fourth a sampling distribution.")
-q("distributions", "The number of pollution incidents reported per week, where incidents occur independently at a constant average rate, is best modelled by which distribution?",
+q("distributions", "The number of customer complaints received per hour, where complaints arrive independently at a constant average rate, is best modelled by which distribution?",
   ["Normal", "Poisson", "Exponential", "Binomial"],
   "B", "Poisson models counts of independent events in a fixed interval. Exponential models the time between them.")
 q("distributions", "The number of successful outcomes in 20 independent trials, each with the same probability of success, follows which distribution?",

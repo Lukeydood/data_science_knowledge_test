@@ -69,9 +69,9 @@ q("standardise", "Standardising a feature means transforming it to have:",
   ["Mean 0 and standard deviation 1", "Minimum 0 and maximum 1 exactly", "Median 0 and range 1", "Only positive values"],
   "A", "Min–max scaling gives 0–1; standardisation gives z-scores.")
 q("feature-engineering", "Which TWO are examples of feature engineering?",
-  ["Creating 'days since last inspection' from dates", "Extracting the month from a timestamp", "Choosing the colour scheme of a chart", "Renaming the output file of the model"],
+  ["Creating 'days since last purchase' from dates", "Extracting the month from a timestamp", "Choosing the colour scheme of a chart", "Renaming the output file of the model"],
   "AB", "Feature engineering creates informative inputs from raw data.")
-q("target-leakage", "A model predicting whether a permit will be revoked includes 'date of revocation letter' as a feature. What is wrong?",
+q("target-leakage", "A model predicting whether a customer will cancel includes 'date of cancellation email' as a feature. What is wrong?",
   ["It is known only after the outcome", "Dates are unsuitable as model features", "The feature has too many missing values", "It makes the model too simple to be useful"],
   "A", "Features must be available at prediction time.")
 q("ensembles-stacking", "Training a meta-model on the predictions of several base models is called:",
@@ -92,8 +92,8 @@ q("association-rules", "Market basket analysis rules such as {bread} → {butter
 q("recommender", "A recommender that suggests items liked by users with similar histories uses:",
   ["Collaborative filtering", "Content-based filtering only", "Linear programming", "Principal component regression"],
   "A", "Content-based filtering instead uses item attributes.")
-q("spatial-interp", "Estimating rainfall at unmonitored locations from nearby gauges, weighting closer gauges more, is:",
-  ["Spatial interpolation", "Temporal aggregation of the gauge records", "Spatial clustering of the gauges with k-means", "Map projection to British National Grid"],
+q("spatial-interp", "Estimating air temperature at unmonitored locations from nearby weather stations, weighting closer ones more, is:",
+  ["Spatial interpolation", "Temporal aggregation of the station records", "Spatial clustering of the stations with k-means", "Map projection to British National Grid"],
   "A", "IDW and kriging are common spatial interpolation methods.")
 
 # --- Visualisation & communication ------------------------------------------------------------

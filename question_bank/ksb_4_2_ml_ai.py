@@ -49,7 +49,7 @@ q("precision-recall", "A classifier gives TP = 40, FP = 10, FN = 20. What is its
 q("precision-recall", "A classifier gives TP = 40, FP = 10, FN = 20. What is its recall?",
   ["0.67", "0.80", "0.57", "0.33"],
   "A", "Recall = TP / (TP + FN) = 40 / 60 ≈ 0.67.")
-q("precision-recall", "For a flood early-warning classifier, missing a real flood is far more costly than a false alarm. Which metric should be prioritised?",
+q("precision-recall", "For a cancer screening classifier, missing a real case is far more costly than a false alarm. Which metric should be prioritised?",
   ["Precision", "Recall", "Specificity", "Accuracy"],
   "B", "Recall (sensitivity) is the share of actual positives detected; maximising it minimises false negatives.")
 q("imbalance", "Only 1% of transactions are fraudulent. A model predicting 'not fraud' for everything achieves 99% accuracy. Which TWO responses are appropriate?",
@@ -81,7 +81,7 @@ q("dbscan", "An advantage of DBSCAN over k-means is that DBSCAN:",
 q("feature-scaling", "For which algorithm is feature scaling LEAST important?",
   ["k-nearest neighbours", "Support vector machine", "Decision tree", "k-means"],
   "C", "Trees split on thresholds one feature at a time, so they are invariant to monotonic scaling; distance-based methods are not.")
-q("encoding", "What is the usual way to encode a nominal categorical variable with no natural order (e.g. 'river', 'lake', 'coast') for a linear model?",
+q("encoding", "What is the usual way to encode a nominal categorical variable with no natural order (e.g. 'card', 'cash', 'voucher') for a linear model?",
   ["Label encoding", "One-hot encoding", "Ordinal encoding", "Min–max scaling"],
   "B", "Integer (label/ordinal) codes imply a false ordering; one-hot avoids that.")
 

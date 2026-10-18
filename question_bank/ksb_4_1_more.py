@@ -14,9 +14,9 @@ q("standard-error", "The standard error of the mean is:",
 q("sample-size", "To halve the width of a confidence interval for a mean, roughly how must the sample size change?",
   ["Increase it fourfold", "Double it", "Increase it eightfold", "Increase it by half"],
   "A", "Width ∝ 1/√n, so halving the width needs 4× the observations.")
-q("percentiles", "A river flow at the 95th percentile (Q95 in hydrology, flow exceeded 95% of the time) is best described as:",
-  ["A low flow", "A median flow", "A high flow", "A mean flow"],
-  "A", "In hydrology, Qx is the flow exceeded x% of the time, so Q95 is a low flow. (Note this is the reverse of an ordinary percentile.)")
+q("percentiles", "A child's height is at the 90th percentile for their age. What does this mean?",
+  ["Taller than about 90% of children their age", "90% of the average height for their age", "Shorter than about 90% of children their age", "10% taller than the median child"],
+  "A", "The pth percentile is the value below which about p% of observations fall. It says nothing about ratios to the mean or median.")
 q("kurtosis", "A distribution with heavier tails and more extreme values than a normal distribution has:",
   ["High (positive excess) kurtosis", "Negative skewness (left tail)", "Low (negative excess) kurtosis", "Zero variance across values"],
   "A", "Kurtosis describes tail heaviness; skewness describes asymmetry.")
@@ -38,9 +38,9 @@ q("law-large-numbers", "As more fair coin tosses are made, the proportion of hea
 q("one-two-tailed", "When is a one-tailed hypothesis test appropriate?",
   ["When only an effect in one specified direction is of interest, decided beforehand", "When the two-tailed result is not significant and a smaller p-value is needed instead", "When the sample size is too small for a two-tailed test to be valid", "When the data are not normally distributed and ranks must be used"],
   "A", "Direction must be specified in advance; switching after seeing data is a form of p-hacking.")
-q("paired-test", "Water quality is measured at the same 20 sites before and after an intervention. Which test compares the means?",
+q("paired-test", "Blood pressure is measured for the same 20 patients before and after a treatment. Which test compares the means?",
   ["Paired t-test", "Two-sample t-test", "Chi-squared test", "One-way ANOVA"],
-  "A", "Measurements are matched by site, so the paired test (on the differences) is appropriate.")
+  "A", "Measurements are matched by patient, so the paired test (on the differences) is appropriate.")
 q("effect-size", "Cohen's d measures:",
   ["The difference between two means in standard deviation units", "The probability that the null hypothesis is actually true", "The proportion of variance explained by a regression", "The strength of association between categorical variables"],
   "A", "Effect sizes describe magnitude independently of sample size; Cramér's V is for categorical association.")
@@ -56,8 +56,8 @@ q("qq-plot", "On a normal Q-Q plot, points curving away from the line at both en
 q("residual-plot", "A plot of residuals against fitted values shows a clear U-shaped pattern. What does this suggest?",
   ["The relationship is non-linear and the model is mis-specified", "The residuals are independent and normally distributed as required", "The predictors are highly correlated with each other", "The model has been regularised too strongly"],
   "A", "Structure in residuals means the model misses a pattern; consider transformations or polynomial terms.")
-q("interaction", "In a regression, an interaction term between rainfall and soil type allows:",
-  ["The effect of rainfall to differ depending on soil type", "Rainfall and soil type to be removed from the model", "The model to ignore observations with missing soil type", "Rainfall to be measured on a logarithmic scale"],
+q("interaction", "In a regression, an interaction term between advertising spend and region allows:",
+  ["The effect of advertising to differ depending on region", "Advertising and region to be removed from the model", "The model to ignore observations with a missing region", "Advertising to be measured on a logarithmic scale"],
   "A", "Interactions model effect modification: one variable's effect depends on another's level.")
 q("adjusted-r2", "Why is adjusted R² preferred to R² when comparing models with different numbers of predictors?",
   ["It penalises adding predictors that don't improve the fit enough", "It rises whenever more predictors are added, rewarding complexity", "It measures prediction error in the original units of the outcome", "It tests whether the residuals are normally distributed"],

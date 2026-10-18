@@ -83,9 +83,9 @@ q("np-axis", "For a 2-D NumPy array `a`, what does `a.mean(axis=0)` compute?",
 q("sql-distinct", "Which query returns the number of different stations in a readings table?",
   ["SELECT COUNT(DISTINCT station) FROM readings", "SELECT DISTINCT COUNT(station) FROM readings", "SELECT COUNT(*) FROM readings GROUP BY station", "SELECT station FROM readings LIMIT 1"],
   "A", "COUNT(DISTINCT col) counts unique non-NULL values; the GROUP BY version returns one row per station.")
-q("sql-like", "Which WHERE clause finds names starting with 'River'?",
-  ["WHERE name LIKE 'River%'", "WHERE name = 'River*'", "WHERE name LIKE '%River'", "WHERE name IN ('River')"],
-  "A", "`%` matches any characters; '%River' would match names ending in River.")
+q("sql-like", "Which WHERE clause finds names starting with 'North'?",
+  ["WHERE name LIKE 'North%'", "WHERE name = 'North*'", "WHERE name LIKE '%North'", "WHERE name IN ('North')"],
+  "A", "`%` matches any characters; '%North' would match names ending in North.")
 q("sql-case", "Which SQL construct creates a new column with 'High' or 'Low' depending on a value?",
   ["CASE WHEN … END", "GROUP BY … HAVING …", "UNION ALL …", "WITH … AS …"],
   "A", "CASE expressions implement conditional logic in SQL.")

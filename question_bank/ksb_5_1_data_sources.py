@@ -6,7 +6,7 @@ q("primary-secondary", "Data collected by your own team through a bespoke field 
   ["Primary data", "Secondary data", "Administrative data", "Open data"],
   "A", "Primary data is collected first-hand for the purpose at hand; secondary data was collected by others for another purpose.")
 q("primary-secondary", "Which TWO are examples of secondary data?",
-  ["Census statistics published by the ONS", "Historical rainfall records from a public API", "Interviews your team conducts for this study", "Readings from sensors your team installs for this trial"],
+  ["Census statistics published by the ONS", "Historical exchange rates from a public API", "Interviews your team conducts for this study", "Readings from sensors your team installs for this trial"],
   "AB", "Secondary data is reused from other collectors; the last two are primary.")
 q("rest-api", "In a REST API, which HTTP method is conventionally used to retrieve data without changing it?",
   ["GET", "POST", "PUT", "PATCH"],

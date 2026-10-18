@@ -79,7 +79,7 @@ q("readme", "Which information is most important in a project README?",
   "A", "A README helps newcomers get started quickly.")
 q("licence", "Why should a public code repository include a licence file?",
   ["Without one, others have no clear legal right to reuse it", "Git refuses to push public repositories that lack a licence file", "It makes the repository appear higher in search results", "It encrypts the code so only licensed users can read it"],
-  "A", "Default copyright applies without a licence; public sector code often uses MIT or OGL.")
+  "A", "Default copyright applies without a licence; permissive licences such as MIT or Apache 2.0 are common for open code.")
 q("pair-programming", "Two developers working at one computer, one writing code and one reviewing in real time, is called:",
   ["Pair programming", "Mob testing sessions", "Rubber ducking", "Trunk merging"],
   "A", "Pairing spreads knowledge and catches issues early.")

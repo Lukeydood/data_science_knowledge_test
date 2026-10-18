@@ -30,7 +30,7 @@ q("grain", "When designing a fact table, what does 'declaring the grain' mean?",
   ["Stating exactly what one row of the fact table represents", "Choosing the compression level for the fact table", "Listing the users allowed to query the fact table", "Deciding how often the fact table will be refreshed from source"],
   "A", "e.g. 'one row per water sample per determinand'. Grain decisions drive which dimensions and measures fit.")
 q("additive-measures", "Which measure is semi-additive: it can be summed across some dimensions but not across time?",
-  ["An account balance", "A sales amount", "A count of incidents", "A volume of water abstracted"],
+  ["An account balance", "A sales amount", "A count of incidents", "A quantity of items sold"],
   "A", "Balances and stock levels add across accounts or sites but not across days (use the latest or average instead).")
 q("conformed-dimension", "A 'Date' dimension shared with the same meaning by several fact tables across the warehouse is a:",
   ["Conformed dimension", "Degenerate dimension", "Junk dimension", "Role-playing fact"],

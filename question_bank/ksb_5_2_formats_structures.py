@@ -7,7 +7,7 @@ q("structure-types", "JSON and XML files are usually classed as:",
   ["Structured data", "Semi-structured data", "Unstructured data", "Relational data"],
   "B", "They have self-describing keys/tags and hierarchy but no rigid tabular schema.")
 q("structure-types", "Which TWO are examples of unstructured data?",
-  ["Free-text consultation responses", "Photographs from site inspections", "A JSON feed of sensor readings", "A CSV of permit records"],
+  ["Free-text customer reviews", "Photographs from insurance claims", "A JSON feed of sensor readings", "A CSV of order records"],
   "AB", "Unstructured data lacks a predefined data model; JSON is semi-structured and CSV is structured.")
 q("structure-types", "A relational database table with defined columns and data types is an example of:",
   ["Structured data", "Semi-structured data", "Unstructured data", "Streaming data"],
@@ -70,7 +70,7 @@ q("tidy-data", "According to 'tidy data' principles, which TWO statements are tr
 q("long-wide", "A table has columns site, 2022, 2023, 2024 containing annual readings. Converting it to columns site, year, reading is called:",
   ["Reshaping wide to long (melting)", "Reshaping long to wide (pivoting)", "Normalising to third normal form", "One-hot encoding the year column"],
   "A", "pandas `melt` turns wide data into long format, which suits most plotting and modelling tools.")
-q("graph-structure", "Data describing connections between entities (e.g. rivers flowing into other rivers) is naturally represented as:",
+q("graph-structure", "Data describing connections between entities (e.g. users following other users) is naturally represented as:",
   ["A graph", "A raster", "A data cube", "A time series"],
   "A", "Graphs model relationships and networks as nodes and edges.")
 q("data-types", "Why can storing a monetary amount as a binary floating-point number cause problems?",

@@ -11,7 +11,7 @@ q("multiple-imputation", "Multiple imputation improves on single imputation main
 q("listwise-deletion", "Dropping every row with any missing value (listwise deletion) is reasonable mainly when:",
   ["Data are MCAR and few rows are lost", "Data are MNAR and many rows are lost", "Most rows have at least one missing value", "The missing values are all in the target"],
   "A", "Under MCAR deletion is unbiased but loses power; otherwise it can bias results.")
-q("forward-fill", "For a river gauge with occasional short gaps, which imputation is often reasonable?",
+q("forward-fill", "For a heart-rate monitor with occasional short gaps, which imputation is often reasonable?",
   ["Interpolating between neighbouring readings", "Replacing gaps with the all-time mean", "Replacing each gap with a zero reading", "Deleting the whole day of data"],
   "A", "Time-series gaps suit interpolation or forward-fill for short gaps; long gaps need more care.")
 q("outlier-robust", "Which TWO statistics are robust to outliers?",
@@ -23,7 +23,7 @@ q("winsorising", "Replacing values above the 99th percentile with the 99th perce
 q("mad", "Which robust measure of spread is based on deviations from the median?",
   ["Median absolute deviation (MAD)", "Standard deviation", "Variance of values", "Coefficient of variation"],
   "A", "MAD-based z-scores are a robust alternative for outlier detection.")
-q("contextual-anomaly", "A water usage of 500 litres is normal at 7am but highly unusual at 3am. This is a:",
+q("contextual-anomaly", "Household electricity use of 3 kWh in an hour is normal at 7pm but highly unusual at 3am. This is a:",
   ["Contextual anomaly", "Global outlier value", "Missing value", "Duplicate record"],
   "A", "Contextual anomalies are unusual only given context such as time of day.")
 q("collective-anomaly", "A sensor reports exactly the same value for 48 hours. Each value is plausible, but the run is suspicious. This is a:",
@@ -44,13 +44,13 @@ q("non-stationary", "A time series whose mean increases steadily over time is:",
 q("random-walk", "Daily share prices often behave like a random walk. What does this imply for forecasting?",
   ["Tomorrow's best forecast is roughly today's value", "Prices return to their long-run mean by the next day", "Prices follow a strong weekly seasonal cycle", "Forecasts improve greatly with complex models"],
   "A", "For random walks the naive forecast is hard to beat.")
-q("aggregation-bias", "Monthly averages of hourly flows hide short floods. This illustrates that:",
-  ["Aggregation can hide important extremes", "Averages are biased upwards for flow data", "Hourly data contains no useful signal", "Monthly data is more accurate than hourly"],
+q("aggregation-bias", "Monthly averages of hourly website traffic hide short outages. This illustrates that:",
+  ["Aggregation can hide important extremes", "Averages are biased upwards for traffic data", "Hourly data contains no useful signal", "Monthly data is more accurate than hourly"],
   "A", "Choose a temporal resolution suited to the question; keep peaks or maxima where they matter.")
 q("rounding-precision", "Readings recorded to the nearest 0.5 m produce a histogram with gaps between values. This pattern comes from:",
   ["Limited measurement precision", "A bimodal underlying population", "Missing not at random data", "Concept drift in the sensor"],
   "A", "Coarse recording creates artificial clumping; methods assuming continuous data may need care.")
-q("detection-limit", "Water quality results below the lab's limit of detection are reported as '<0.01'. How should they be treated?",
+q("detection-limit", "Blood test results below the lab's limit of detection are reported as '<0.01'. How should they be treated?",
   ["As left-censored values, not zeros or missing", "As zeros, since nothing was detected", "As missing, and deleted from analysis", "As exactly 0.01, with no adjustment or flag"],
   "A", "Censored-data methods (or substitution with sensitivity checks) avoid bias.")
 q("unit-inconsistency", "A combined dataset shows flows around 2 for some sites and 2000 for others. Which TWO explanations should be checked first?",
@@ -77,6 +77,6 @@ q("data-collection-change", "After a new app makes reporting easier, recorded in
 q("survivorship-model", "A failure-prediction model is trained only on assets still in service. Which pattern biases it?",
   ["Survivorship bias", "Seasonality in failures", "Heaping at round values", "Zero-inflation"],
   "A", "Assets that already failed are excluded, so risk factors are under-represented.")
-q("feedback-loop", "A model directs inspections to high-risk sites, and new training data comes only from inspected sites. What risk arises?",
-  ["A feedback loop reinforcing the model's own biases", "The model becomes more accurate on every site", "The data becomes missing completely at random", "Inspections reduce the number of features available"],
+q("feedback-loop", "A model directs fraud investigations to high-risk accounts, and new training data comes only from investigated accounts. What risk arises?",
+  ["A feedback loop reinforcing the model's own biases", "The model becomes more accurate on every account", "The data becomes missing completely at random", "Investigations reduce the number of features available"],
   "A", "Data generated by the model's decisions can entrench errors; reserve some random checks.")

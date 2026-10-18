@@ -18,8 +18,8 @@ q("context-window", "An LLM's 'context window' refers to:",
 q("contextual-embeddings", "How do contextual embeddings (e.g. from BERT) differ from static embeddings (e.g. word2vec)?",
   ["The same word gets different vectors depending on surrounding words", "The same word gets one fixed vector regardless of the sentence it is in", "They represent whole documents rather than individual words", "They are built by counting words rather than by training"],
   "A", "'Bank' in 'river bank' and 'bank account' gets different contextual vectors.")
-q("sentence-embeddings", "To find consultation responses that are semantically similar to a given response, a good approach is:",
-  ["Sentence embeddings with cosine similarity", "Exact string matching on whole responses", "Counting how many characters each one has", "Sorting responses alphabetically by first word"],
+q("sentence-embeddings", "To find product reviews that are semantically similar to a given review, a good approach is:",
+  ["Sentence embeddings with cosine similarity", "Exact string matching on whole reviews", "Counting how many characters each one has", "Sorting reviews alphabetically by first word"],
   "A", "Sentence-level embeddings capture meaning even when wording differs.")
 q("zero-shot", "Classifying text into categories the model was never explicitly trained on, using only label descriptions, is:",
   ["Zero-shot classification", "Supervised fine-tuning on labels", "Active learning", "Topic modelling"],
@@ -30,7 +30,7 @@ q("active-learning", "A team labels the examples a model is most uncertain about
 q("label-quality", "Two annotators label the same 200 responses. Which statistic measures their agreement beyond chance?",
   ["Cohen's kappa", "Pearson's r", "BLEU score", "Silhouette score"],
   "A", "Kappa corrects raw percentage agreement for agreement expected by chance.")
-q("multi-label", "A consultation response can mention several themes at once. This classification task is:",
+q("multi-label", "A product review can mention several topics at once. This classification task is:",
   ["Multi-label", "Multi-class", "Binary", "Ordinal"],
   "A", "Multi-label allows several labels per item (often sigmoid outputs); multi-class assigns exactly one.")
 q("summarisation", "What is the difference between extractive and abstractive summarisation?",
@@ -71,7 +71,7 @@ q("video", "Following the same vehicle across frames of a traffic video is calle
 q("change-detection", "Comparing satellite images of the same area from different dates to find new construction or flooding is:",
   ["Change detection", "Pose estimation", "Image captioning", "Face verification"],
   "A", "Change detection is widely used in environmental monitoring and needs aligned, comparable images.")
-q("cloud-cover", "Which TWO are practical challenges when using optical satellite imagery for environmental monitoring?",
+q("cloud-cover", "Which TWO are practical challenges when using optical satellite imagery for monitoring crops or cities?",
   ["Cloud cover hiding the ground", "Different lighting and seasons between images", "Images containing no spatial information", "Every pixel being labelled in advance"],
   "AB", "Clouds, illumination and seasonal differences complicate analysis; radar (SAR) can see through cloud.")
 q("sar", "Why is Synthetic Aperture Radar (SAR) imagery useful for flood mapping?",
@@ -89,6 +89,6 @@ q("multimodal", "A model that can answer questions about the content of a photog
 q("generative-images", "Which TWO are risks of using AI-generated images in public communications?",
   ["Misleading people if images are not labelled as synthetic", "Copyright and consent issues around training data", "Generated images are too large to store in common file formats", "Image generators work only in black and white"],
   "AB", "Transparency and intellectual property are key concerns with generative imagery.")
-q("edge-cv", "A camera trap must classify animals in the field with no internet connection. Which approach suits this?",
+q("edge-cv", "A handheld scanner in a warehouse must classify damaged parcels with no internet connection. Which approach suits this?",
   ["A compact model running on the device", "A large model called through a cloud API", "Manual review of every photo in real time", "Uploading raw video for overnight processing"],
   "A", "On-device (edge) inference works offline; models are compressed to fit hardware limits.")

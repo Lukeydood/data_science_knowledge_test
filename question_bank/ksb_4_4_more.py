@@ -41,8 +41,8 @@ q("latency-accuracy", "An ensemble improves accuracy slightly but triples predic
 q("open-vs-proprietary-llm", "Which TWO are typical reasons to choose an open-weight LLM hosted in-house over a proprietary API?",
   ["Greater control over where data is processed", "Ability to fine-tune and fix the model version", "Lower total effort to run and maintain it", "Higher accuracy than all proprietary models"],
   "AB", "Self-hosting gives control and stability but adds operational burden; it is not automatically more accurate.")
-q("procurement", "In UK public sector organisations, which constraint commonly affects adopting a new commercial analytics tool?",
-  ["Procurement rules, security assurance and approval timescales", "A legal ban on most commercial software in central government", "A requirement that every tool is written in Python", "A rule that cloud services may only be used at weekends"],
+q("procurement", "In large regulated organisations such as banks, which constraint commonly affects adopting a new commercial analytics tool?",
+  ["Procurement rules, security assurance and approval timescales", "A legal ban on most commercial software in regulated industries", "A requirement that every tool is written in Python", "A rule that cloud services may only be used at weekends"],
   "A", "Procurement, information assurance and accreditation can take months and must be planned for.")
 q("support-skills", "A team is choosing between R and Python for a new production pipeline. Which factor matters most organisationally?",
   ["Which language the team can support and maintain", "Which language has the shorter name to type", "Which language was released first historically", "Which language uses fewer brackets in its syntax"],

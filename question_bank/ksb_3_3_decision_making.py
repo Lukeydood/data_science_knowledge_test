@@ -3,9 +3,9 @@ from ._helpers import make_builder
 q, QUESTIONS = make_builder("3.3", "Data-driven decision making and the good use of evidence and analytics")
 
 # --- Causation & evidence -------------------------------------------------------
-q("correlation-causation", "Areas with more bird-watching clubs show higher rates of river restoration. A manager concludes that funding more clubs will cause more restoration. What is the main flaw?",
-  ["The sample of areas is too small to detect an effect", "An association alone does not show the clubs cause restoration", "The correlation should have been tested for normality first", "Club membership is a count, so Spearman should be used"],
-  "B", "Observational association may reflect confounding (e.g. local environmental engagement) or reverse causation; causal claims need experimental or quasi-experimental evidence.")
+q("correlation-causation", "Towns with more coffee shops have higher house prices. An investor concludes that opening more coffee shops will push house prices up. What is the main flaw?",
+  ["The sample of areas is too small to detect an effect", "An association alone does not show the shops cause the rise", "The correlation should have been tested for normality first", "Shop numbers are counts, so Spearman should be used"],
+  "B", "Observational association may reflect confounding (e.g. local incomes) or reverse causation; causal claims need experimental or quasi-experimental evidence.")
 q("confounding", "Ice-cream sales and drowning incidents are positively correlated. What is the most likely explanation?",
   ["Reverse causation from drownings to sales", "A third variable, hot weather, drives both", "Measurement error in the drowning records", "Regression to the mean in both series"],
   "B", "A confounder influences both variables, creating a spurious association.")
@@ -18,7 +18,7 @@ q("evidence-hierarchy", "In a typical hierarchy of evidence, which sits at the t
 q("quasi-experiment", "A policy is introduced in one region but not a similar neighbouring region. Comparing the change over time in both regions estimates the policy effect. Which method is this?",
   ["Difference-in-differences", "Regression discontinuity", "Propensity score matching", "Instrumental variables"],
   "A", "Difference-in-differences uses a comparison group's trend as the counterfactual, assuming parallel trends.")
-q("counterfactual", "When evaluating whether a flood-awareness campaign worked, why is a counterfactual needed?",
+q("counterfactual", "When evaluating whether a customer loyalty campaign worked, why is a counterfactual needed?",
   ["To estimate what would have happened without the campaign", "To compare the campaign's cost with its planned budget", "To check the outcome data were collected consistently", "To identify which groups the campaign failed to reach"],
   "A", "Impact = outcome with intervention minus outcome without it; the counterfactual is the 'without' estimate.")
 
@@ -32,7 +32,7 @@ q("survivorship-bias", "Analysing only businesses that are still trading to find
 q("anchoring", "Stakeholders estimate a project cost after first hearing an unrelated high figure, and their estimates are skewed upward. This is:",
   ["Anchoring bias", "Availability bias", "Optimism bias", "Hindsight bias"],
   "A", "Anchoring is over-reliance on the first piece of information encountered.")
-q("availability", "After a high-profile flood is in the news, a team overestimates how often such floods occur. This reflects:",
+q("availability", "After a high-profile data breach is in the news, a team overestimates how often such breaches occur. This reflects:",
   ["Availability bias", "Anchoring bias", "Confirmation bias", "Optimism bias"],
   "A", "Availability bias judges frequency by how easily examples come to mind.")
 q("selection-bias", "An online survey about broadband access is used to estimate national internet usage. What is the main concern?",
@@ -72,7 +72,7 @@ q("analytics-types", "A model that recommends the optimal allocation of maintena
 q("analytics-types", "Investigating why customer complaints rose last quarter is which type of analytics?",
   ["Descriptive", "Diagnostic", "Predictive", "Prescriptive"],
   "B", "Diagnostic analytics answers 'why did it happen?'.")
-q("analytics-types", "Forecasting next month's water demand from historical data is which type of analytics?",
+q("analytics-types", "Forecasting next month's sales from historical data is which type of analytics?",
   ["Descriptive", "Diagnostic", "Predictive", "Prescriptive"],
   "C", "Predictive analytics answers 'what is likely to happen?'.")
 q("data-quality", "30% of incident records have no postcode. Which data quality dimension is affected?",
@@ -86,15 +86,6 @@ q("data-quality", "The same customer appears three times in a CRM with slightly 
   "A", "Uniqueness means each real-world entity is recorded once.")
 
 # --- UK government frameworks & ethics ----------------------------------------------
-q("aqua-book", "Which UK government publication provides guidance on producing quality analysis and the quality assurance of analytical models?",
-  ["The Aqua Book", "The Green Book", "The Magenta Book", "The Orange Book"],
-  "A", "Aqua Book = analytical quality assurance; Green Book = appraisal (incl. cost-benefit); Magenta Book = evaluation; Orange Book = risk management.")
-q("green-book", "Which HM Treasury guidance sets out how to appraise policies, programmes and projects, including cost-benefit analysis?",
-  ["The Green Book", "The Aqua Book", "The Magenta Book", "The Orange Book"],
-  "A", "The Green Book is central government guidance on appraisal.")
-q("magenta-book", "Which HM Treasury guidance focuses on how to design and carry out evaluation of policies?",
-  ["The Magenta Book", "The Aqua Book", "The Green Book", "The Orange Book"],
-  "A", "The Magenta Book covers evaluation design and methods.")
 q("five-safes", "The 'Five Safes' framework for providing access to sensitive data consists of:",
   ["Safe people, projects, settings, data and outputs", "Safe storage, access, transfer, retention and disposal", "Safe collection, consent, purpose, accuracy and security", "Safe models, metrics, monitoring, review and release"],
   "A", "The Five Safes (used by ONS and others) assess access to confidential data across people, projects, settings, data and outputs.")

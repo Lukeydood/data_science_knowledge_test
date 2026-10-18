@@ -45,7 +45,7 @@ q("rate-limits", "An external API allows 100 requests per minute. A pipeline nee
   ["Throttling with back-off and retry, spread over time", "Parallel workers so all calls finish within a minute", "A second API key to double the permitted rate", "A long timeout so slow requests are not abandoned"],
   "A", "Respecting rate limits prevents throttling and blocking; exponential back-off handles transient 429 errors. Extra keys to evade limits usually breach terms.")
 q("build-vs-buy", "Which TWO factors are most relevant when deciding whether to build a tool in-house or buy a commercial product?",
-  ["Total cost of ownership, including support and maintenance", "Whether the team has the skills to build and maintain it", "Whether the vendor's product is written in Python", "How many other public bodies have built their own"],
+  ["Total cost of ownership, including support and maintenance", "Whether the team has the skills to build and maintain it", "Whether the vendor's product is written in Python", "How many competitors have built their own version"],
   "AB", "Build vs buy weighs cost, skills, time to value, fit and lock-in.")
 q("open-source", "Which is a common risk of adopting an open-source library for a production pipeline?",
   ["It may be poorly maintained or have an unsuitable licence", "Its licence restricts it to on-premise deployment only", "It needs a commercial support contract to be used in government", "It requires a per-user commercial licence fee"],

@@ -18,7 +18,7 @@ q("bag-of-words", "What is a key limitation of the bag-of-words representation?"
 q("tf-idf", "What does the IDF part of TF-IDF do?",
   ["Up-weights terms that appear in many documents", "Down-weights terms that appear in many documents", "Up-weights terms that appear often in one document", "Down-weights terms that appear rarely in the corpus"],
   "B", "Inverse document frequency down-weights terms common across the corpus; TF up-weights terms frequent within a document.")
-q("n-grams", "In the phrase 'flood risk assessment', 'flood risk' and 'risk assessment' are examples of:",
+q("n-grams", "In the phrase 'credit risk assessment', 'credit risk' and 'risk assessment' are examples of:",
   ["Bigrams", "Lemmas", "Named entities", "Sub-word tokens"],
   "A", "N-grams are sequences of n adjacent tokens; capturing them retains some local word order.")
 q("pos-tagging", "Labelling each word in a sentence as noun, verb, adjective, etc. is called:",
@@ -38,8 +38,8 @@ q("transformers", "What mechanism allows transformer models to weigh the relevan
 q("bert-gpt", "Which statement correctly contrasts BERT and GPT-style models?",
   ["BERT is a bidirectional encoder; GPT is a left-to-right decoder", "BERT is a left-to-right decoder; GPT is a bidirectional encoder", "BERT is a recurrent network; GPT is a convolutional network", "BERT is trained to generate text; GPT to classify sentences"],
   "A", "Encoder models suit classification/extraction; decoder (autoregressive) models suit generation.")
-q("transfer-learning-nlp", "A team has 2,000 labelled consultation responses. Which approach is usually most effective for classifying them into themes?",
-  ["Train a transformer language model from scratch on the responses", "Fine-tune a pre-trained transformer or prompt a pre-trained LLM", "Write a keyword rule for each theme and apply it to the text", "Cluster the responses with k-means and use clusters as themes"],
+q("transfer-learning-nlp", "A team has 2,000 labelled customer support tickets. Which approach is usually most effective for classifying them into topics?",
+  ["Train a transformer language model from scratch on the tickets", "Fine-tune a pre-trained transformer or prompt a pre-trained LLM", "Write a keyword rule for each topic and apply it to the text", "Cluster the tickets with k-means and use clusters as topics"],
   "B", "Transfer learning reuses knowledge from large corpora, so small labelled sets go much further. Rules and clustering can help but are usually less accurate.")
 q("ner", "Extracting the names of people, organisations, places and dates from text is:",
   ["Named entity recognition", "Part-of-speech tagging", "Topic modelling", "Relation extraction"],
@@ -91,7 +91,7 @@ q("transfer-learning-cv", "With only 500 labelled images, which approach is usua
 q("ndvi", "The NDVI vegetation index, derived from satellite imagery, is calculated from which two spectral bands?",
   ["Near-infrared and red", "Near-infrared and blue", "Green and red", "Thermal infrared and red"],
   "A", "NDVI = (NIR − Red) / (NIR + Red); healthy vegetation reflects NIR strongly and absorbs red.")
-q("ocr", "Converting scanned paper permits into machine-readable text uses:",
+q("ocr", "Converting scanned paper invoices into machine-readable text uses:",
   ["Optical character recognition", "Named entity recognition", "Semantic segmentation", "Image captioning"],
   "A", "OCR extracts text from images; NER can then pull entities from the resulting text.")
 q("yolo", "Single-stage object detectors such as YOLO are particularly suited to:",

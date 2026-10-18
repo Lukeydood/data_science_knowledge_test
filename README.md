@@ -2,7 +2,8 @@
 
 Free, self-marking practice papers for the **Data Scientist integrated degree apprenticeship (ST0585)** End-Point Assessment **Knowledge Test** (30 multiple-choice questions on KSBs 3.1–5.3).
 
-- **730 questions**: 652 on the assessed KSBs (40+ distinct concepts per KSB) plus 78 optional general data science questions
+- **826 questions**: 739 on the assessed KSBs (50+ distinct concepts per KSB, including broad scenario questions that span several KSBs) plus 87 optional general data science questions
+- Examples are drawn from many sectors – retail, finance, health, transport, energy, tech – with no single sector dominating
 - Every paper covers every KSB, with options shuffled and no repeated concepts
 - Answers are written so the correct option can't be spotted by length or wording (checked automatically)
 - Marks itself: score out of 30, **PASS/FAIL against a 60% pass mark (18/30)**, wrong answers highlighted in red with the correct answer and an explanation, and a per-KSB breakdown
@@ -73,7 +74,7 @@ build_site.py            Builds the web app into site/index.html
 exam_template.html       Self-marking paper (HTML/CSS/JS, no external dependencies)
 web/app_template.html    Web app settings page; embeds the bank and paper template
 question_bank/
-  ksb_*.py               Assessed KSB questions (3.1–5.3), two modules per KSB
+  ksb_*.py               Assessed KSB questions (3.1–5.3); ksb_coverage_extra.py adds gap-fillers and broad scenarios
   gen_*.py               Optional general data science questions
   themes.py              Broad-theme Google search for each concept (shown after marking)
   cues.py                Checks that answers can't be guessed from length/wording

@@ -26,9 +26,9 @@ q("database-connection", "Which TWO are good practices when an analysis connects
 q("odbc-jdbc", "ODBC and JDBC are:",
   ["Standard interfaces for connecting applications to databases", "File formats for exporting tables from spreadsheet tools", "Protocols for streaming events between microservices", "Licences that govern reuse of government data"],
   "A", "Drivers implementing ODBC/JDBC let tools such as Python, R or Power BI query many database engines.")
-q("hydrology-api", "The Environment Agency publishes near real-time river level and flow readings through:",
+q("hydrology-api", "Many public transport operators publish near real-time departures and delays through:",
   ["A public open data API", "A paid commercial feed", "A weekly printed bulletin", "A members-only intranet"],
-  "A", "EA flood-monitoring and hydrology APIs are open data under the Open Government Licence.")
+  "A", "Live transport, weather and similar feeds are commonly published as open data APIs, often under open licences such as the OGL.")
 q("ons-data", "Which UK body is the main producer of official statistics such as the census and labour market data?",
   ["The Office for National Statistics", "The Information Commissioner's Office", "The Government Digital Service", "The National Audit Office"],
   "A", "ONS produces official statistics; ICO regulates data protection; NAO audits spending.")
@@ -41,14 +41,14 @@ q("data-revisions", "A published monthly figure is later changed as more complet
 q("geospatial-sources", "Which UK organisation is the national mapping agency providing authoritative geographic data?",
   ["Ordnance Survey", "Met Office", "Land Registry", "Natural England"],
   "A", "OS provides mapping and products such as AddressBase (with UPRNs); the Met Office provides weather data.")
-q("weather-data", "For historical UK weather observations to explain variation in river flows, the most authoritative source is:",
+q("weather-data", "To explain how the weather affects ice-cream sales, the most authoritative source is:",
   ["The Met Office", "Social media posts", "News reports", "A travel website"],
   "A", "Use authoritative observational datasets; secondary sources are incomplete and unverified.")
 q("social-media-api", "Why has collecting large volumes of social media data become harder for researchers?",
   ["Platforms have restricted or begun charging for API access", "Social media posts are no longer stored with timestamps", "UK law now prohibits most analysis of public posts by researchers", "Most platforms have stopped allowing text posts"],
   "A", "Access changes by platforms mean research data pipelines can break; check terms and costs.")
-q("sampling-social", "Tweets mentioning a river are used to estimate public concern across England. Which TWO biases are most likely?",
-  ["Users skew younger and more urban", "A few highly active accounts dominate volume", "Every resident is equally likely to post about the river", "Posts are spread evenly across the regions of England"],
+q("sampling-social", "Social media posts mentioning a brand are used to estimate customer satisfaction across the UK. Which TWO biases are most likely?",
+  ["Users skew younger and more urban", "A few highly active accounts dominate volume", "Every customer is equally likely to post about the brand", "Posts are spread evenly across the regions of the UK"],
   "AB", "Platform demographics and activity concentration both distort representativeness.")
 q("news-api", "When building a dataset from news articles via an aggregator API, which TWO checks are important?",
   ["Removing duplicate syndicated copies of the same story", "Checking licence terms for storing full article text", "Keeping only articles with the most dramatic headlines", "Assuming publication date equals the date of the event"],
@@ -56,21 +56,18 @@ q("news-api", "When building a dataset from news articles via an aggregator API,
 q("logs", "Web server logs recording every page request are an example of:",
   ["Event data", "Survey data", "Experimental data", "Reference data"],
   "A", "Logs are high-volume, semi-structured event data, useful for usage analysis and monitoring.")
-q("reference-data", "A table of valid local authority codes and names used to validate other datasets is:",
+q("reference-data", "A table of valid country codes and names used to validate other datasets is:",
   ["Reference data", "Transactional data", "Event data", "Telemetry data"],
   "A", "Reference data is a controlled list of permissible values shared across systems.")
 q("master-data", "Maintaining a single trusted record of each customer or site across multiple systems is called:",
   ["Master data management", "Change data capture", "Data virtualisation", "Data lake zoning rules"],
   "A", "MDM resolves duplicates and conflicts to create a golden record.")
-q("crowdsourced", "Which is a key quality risk of crowdsourced (citizen science) environmental observations?",
+q("crowdsourced", "Which is a key quality risk of crowdsourced (citizen science) observations such as wildlife sightings?",
   ["Varying skill and effort among contributors", "Observations usually lack a precise location", "Data volumes are too small to analyse", "Contributors are paid per record submitted"],
   "A", "Validation, training and quality flags help; citizen science can still add great spatial coverage.")
 q("data-catalogue", "A searchable inventory of an organisation's datasets with descriptions, owners and access information is a:",
   ["Data catalogue", "Data lake", "Data mart", "Data warehouse"],
   "A", "Catalogues (e.g. Microsoft Purview) improve findability and governance.")
-q("information-asset-owner", "In UK public sector information governance, who is accountable for a particular dataset and its risks?",
-  ["The Information Asset Owner", "The newest analyst to use it", "The cloud provider hosting it", "The person who last edited it"],
-  "A", "IAOs are senior staff accountable for information assets; data stewards often handle day-to-day management.")
 q("special-category", "Under UK GDPR, which TWO are special category data needing extra conditions to process?",
   ["Health data", "Racial or ethnic origin", "Postcode of residence", "Job title"],
   "AB", "Special categories include health, race/ethnicity, religion, biometrics, sex life/orientation, politics and union membership.")
