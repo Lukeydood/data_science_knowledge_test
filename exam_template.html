@@ -115,6 +115,17 @@
 
   #submit-row { padding: 32px 0 0; }
 
+  /* Save for study */
+  .save { margin-left: auto; font: 600 .8rem/1 var(--sans); padding: 7px 12px; border-radius: 999px; cursor: pointer;
+          border: 1.5px solid var(--rule); background: transparent; color: var(--ink-2); }
+  .save:hover { border-color: var(--ink); color: var(--ink); }
+  .save[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  #study { padding: 28px 0 8px; }
+  #study h2 { font-size: 1rem; font-weight: 650; margin: 0 0 4px; }
+  #study p { margin: 0 0 10px; color: var(--ink-2); font-size: .9rem; }
+  #study textarea { width: 100%; min-height: 260px; box-sizing: border-box; padding: 12px; border: 1.5px solid var(--rule);
+                    border-radius: 10px; background: var(--sheet); color: var(--ink); font: 400 .9rem/1.5 var(--sans); resize: vertical; }
+
   /* Results */
   #results { padding: 36px 0 28px; border-bottom: 1px solid var(--rule); outline: none; }
   #results h2 { font-size: 1rem; font-weight: 650; margin: 0 0 4px; color: var(--ink-2); }
@@ -151,7 +162,7 @@
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   @media print {
-    header.top, .actions, .toggle, #submit-row { display: none !important; }
+    header.top, .actions, .toggle, #submit-row, #study, .save { display: none !important; }
     body { background: #fff; color: #000; } .q { break-inside: avoid; }
   }
 </style>
@@ -187,6 +198,13 @@
   <div class="actions hidden" id="submit-row">
     <button class="btn primary" id="submit-btn" type="button">Submit and mark</button>
   </div>
+
+  <section class="hidden" id="study">
+    <h2>Study prompt (<span id="study-count">0</span> saved)</h2>
+    <p>Copy this into an LLM to get notes covering every saved question's search topic in one go.</p>
+    <textarea id="study-text" readonly aria-label="Study prompt"></textarea>
+    <div class="actions" style="margin-top:10px"><button class="btn small" id="study-copy" type="button">Copy prompt</button></div>
+  </section>
 </main>
 
 <script>
@@ -201,6 +219,7 @@ const EXAM = /*__EXAM_DATA__*/null;
   const form = document.getElementById("exam");
   const total = EXAM.questions.length;
   let submitted = false, deadline = null, tick = null, startedAt = null;
+  const saved = new Set();
 
   function decodeKey() {
     const bytes = Uint8Array.from(atob(EXAM.key), c => c.charCodeAt(0));
@@ -238,6 +257,10 @@ const EXAM = /*__EXAM_DATA__*/null;
       const body = el("div", {class: "q-body"});
       const head = el("div", {class: "q-head"});
       head.append(el("span", {class: "q-ksb"}, areaLabel(q.ksb)));
+      const save = el("button", {class: "save", type: "button", "aria-pressed": saved.has(i) ? "true" : "false"},
+                      saved.has(i) ? "Saved" : "Save for study");
+      save.addEventListener("click", () => toggleSaved(i, save));
+      head.append(save);
       body.append(head);
       body.append(el("p", {class: "q-text", id: `q${i + 1}t`}, q.question));
       let instr;
@@ -260,6 +283,39 @@ const EXAM = /*__EXAM_DATA__*/null;
     });
   }
   buildForm();
+
+  // ---------- Saved questions -> study prompt ----------
+  function toggleSaved(i, btn) {
+    if (saved.has(i)) saved.delete(i); else saved.add(i);
+    const on = saved.has(i);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.textContent = on ? "Saved" : "Save for study";
+    renderStudy();
+  }
+  function buildStudyPrompt() {
+    const searches = decodeKey().searches || [];
+    const topics = [];
+    [...saved].sort((a, b) => a - b).forEach(i => {
+      const t = searches[i];
+      if (t && !topics.includes(t)) topics.push(t);
+    });
+    return "You are a data science tutor. For each Google search topic below, write a clear, self-contained explanation " +
+      "(definition, why it matters, a short worked example, and common pitfalls). Answer all topics in one single response, " +
+      "with a heading per topic, in the order given.
+
+Topics:
+" + topics.map((t, n) => `${n + 1}. ${t}`).join("
+") + "
+";
+  }
+  function renderStudy() {
+    document.getElementById("study").classList.toggle("hidden", saved.size === 0);
+    document.getElementById("study-count").textContent = saved.size;
+    if (saved.size) document.getElementById("study-text").value = buildStudyPrompt();
+  }
+  document.getElementById("study-copy").addEventListener("click", e => {
+    copyText(document.getElementById("study-text").value, e.currentTarget, "Copy prompt");
+  });
 
   function selected(i) {
     return [...form.querySelectorAll(`input[name="q${i}"]:checked`)].map(x => +x.value).sort();
@@ -362,8 +418,8 @@ const EXAM = /*__EXAM_DATA__*/null;
     renderResults(score, results, byKsb, timedOut, usedMs);
   }
 
-  function copyText(text, btn) {
-    const done = ok => { btn.textContent = ok ? "Copied" : "Select and copy"; setTimeout(() => (btn.textContent = "Copy"), 1600); };
+  function copyText(text, btn, label = "Copy") {
+    const done = ok => { btn.textContent = ok ? "Copied" : "Select and copy"; setTimeout(() => (btn.textContent = label), 1600); };
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(text).then(() => done(true), () => done(fallback()));
     } else done(fallback());
@@ -447,6 +503,7 @@ const EXAM = /*__EXAM_DATA__*/null;
   function resetPaper() {
     clearInterval(tick);
     submitted = false; deadline = null; tick = null; startedAt = null;
+    saved.clear(); renderStudy();
     form.classList.remove("marked");
     buildForm();
     updateProgress();
